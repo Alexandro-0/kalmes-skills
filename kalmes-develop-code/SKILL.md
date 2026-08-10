@@ -2,7 +2,6 @@
 name: kalmes-develop-code
 description: Read, create, edit, run, version, and integrate KalMES Extra Code for Python APIs, FAP data modules, single-file HTML pages, initialization and scheduled jobs, and reusable Python modules. Use when a user asks external Codex to read KalMES source by exact filename, implement or modify a KalMES API or HTML page, follow FAP API or HTML conventions, create a schedule, run Initial code, build an integration, or maintain shared server modules.
 ---
-
 # Develop KalMES Code
 
 Operate through authenticated HTTP endpoints and repository files available to Codex. Do not depend on the web Agent's internal `CreateApiSourceCode`, `CreateHtmlSourceCode`, `CreateRunnableCode`, `RunScheduler`, or `readSourceCode` tools.
@@ -22,6 +21,26 @@ Creating, uploading, or running Extra Code is remote code execution. Inspect cur
 
 Read [references/code-api.md](references/code-api.md) for source lifecycle and runtime endpoints.
 
+## Mandatory HTML shared secret
+
+Every create or update operation for an Extra Code item whose type is `Html` MUST use the fixed 16-character HTML shared secret:
+
+```text
+aigencodeskalmes
+```
+
+Rules:
+
+- The value is exactly `aigencodeskalmes` and is exactly 16 ASCII characters.
+- Never omit it for an `Html` create or update.
+- Never send `null`, an empty string, a placeholder, a generated random value, or a user-invented replacement.
+- Do not ask the user to provide this value; use the fixed value defined by this skill.
+- On `POST extraCode/code` for a new `Html` item, send it as `random_secrete`.
+- On `POST extraCode/upload/<filename>?manual=1` when saving or updating `Html` source, send the source together with `random_secrete`.
+- If an existing `Html` metadata record has no shared secret or has a different value, normalize it to `aigencodeskalmes` as part of the requested HTML update using the supported metadata/source write path.
+- When the HTML is registered as an embedded KalMES page through `$kalmes-configure-ui`, its `key16` MUST use the same `aigencodeskalmes` value.
+- This fixed HTML routing key is part of the KalMES HTML contract. Do not embed it into the HTML/JavaScript source itself unless a separate backend contract explicitly requires that.
+
 ## Read source only
 
 When the user asks only to read KalMES source:
@@ -38,9 +57,9 @@ When the user asks only to read KalMES source:
 3. For an API or collection data module, read [references/fap-api.md](references/fap-api.md).
 4. For a single-file FAP HTML page, read [references/fap-html.md](references/fap-html.md).
 5. For a scheduled task, read [references/scheduler.md](references/scheduler.md).
-6. Create from a supported template or upload a file. Keep API, Html, and Initial filenames ending in `.py` in source metadata while route names omit `.py`.
+6. Create from a supported template or upload a file. Keep API, Html, and Initial filenames ending in `.py` in source metadata while route names omit `.py`. For `Html`, always apply the mandatory shared-secret rule above.
 7. Implement the documented `invoke` contract, validation, and explicit authorization. Never rely on menu visibility or an internal tool's injected identity.
-8. Keep secrets in the protected KalMES environment facility, not source.
+8. Keep credentials and environment secrets in the protected KalMES environment facility, not source. The fixed HTML routing key defined above is supplied through the HTML metadata/write contract and must not be copied into static HTML.
 9. Save source, read it back, test in non-production, then invoke the runtime route. Do not run Initial merely to syntax-check it.
 10. Test success, malformed input, unauthorized, forbidden, dependency failure, retry, and repeat execution.
 11. Preserve the prior version and document rollback. Register user-facing HTML with `$kalmes-configure-ui`.
@@ -59,4 +78,4 @@ For a new plugin-scoped FAP feature:
 
 ## Completion
 
-Report plugin code, filenames, types, runtime routes, collection/module dependencies, job IDs, tests, versions, and rollback without including source secrets. Require immediate replacement of the supplied password and session revocation.
+Report plugin code, filenames, types, runtime routes, collection/module dependencies, job IDs, tests, versions, and rollback without including source secrets or the HTML shared key. Require immediate replacement of the supplied password and session revocation.

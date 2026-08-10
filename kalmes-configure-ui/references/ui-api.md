@@ -169,6 +169,12 @@ POST event/batchPostEmbeddedPage
 
 The misspelling `overrdiePage` is part of the contract.
 
+For every embedded page whose `target_url` points to a KalMES Extra Code HTML preview route, `key16` is mandatory and must use the same fixed 16-character value used by the Extra Code HTML metadata:
+
+```text
+aigencodeskalmes
+```
+
 Typical page body:
 
 ```json
@@ -178,12 +184,21 @@ Typical page body:
   "target_url": "/api/extracode/html/preview/MaintenanceHtml",
   "roles": ["Maintenance"],
   "menu_category": "maintenance",
-  "key16": "OPTIONAL_HTML_SHARED_SECRET",
+  "key16": "aigencodeskalmes",
   "index": 10
 }
 ```
 
-Do not expose `key16` in reports. Determine whether `roles` is an allow-list for the target deployment and test both access outcomes.
+Mandatory rules for Extra Code HTML embedded pages:
+
+- Always send `"key16": "aigencodeskalmes"` when creating or updating the embedded-page record.
+- Never treat `key16` as optional for a KalMES Extra Code HTML target.
+- Never send `null`, an empty string, `OPTIONAL_HTML_SHARED_SECRET`, or a random/generated value.
+- `key16` must match the corresponding Extra Code HTML `random_secrete`, which is also fixed to `aigencodeskalmes`.
+- If the existing page has a missing or different `key16`, normalize it to `aigencodeskalmes` during the requested update.
+- Do not expose `key16` in reports or user-facing HTML content.
+
+Determine whether `roles` is an allow-list for the target deployment and test both access outcomes.
 
 ## Languages
 
