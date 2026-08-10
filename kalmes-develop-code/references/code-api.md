@@ -10,24 +10,73 @@ POST  extracode/codeuploader                         multipart file
 PATCH extracode/codeuploader/<id>                    metadata/visibility
 POST  extraCode/code                                 create from template
 GET   extraCode/live/<filename>?plugin=<folder>      read source
-POST  extraCode/upload/<filename>?manual=1           {"code":"..."}
+POST  extraCode/upload/<filename>?manual=1           save/update source
 GET   extracode/codeVersion/<filename>
 GET   extracode/codeHistory/<history_name>
 POST  extracode/run/<filename>
 ```
 
-`POST extraCode/code` requires JWT and a `pro` or `premium` license. Supported body:
+`POST extraCode/code` requires JWT and a `pro` or `premium` license.
+
+Typical body for non-HTML types:
 
 ```json
 {
   "name": "FeatureApi.py",
   "type": "API",
-  "random_secrete": "HTML_SHARED_SECRET_IF_NEEDED",
+  "hashTag": "OPTIONAL_TAG"
+}
+```
+
+For `Html`, the fixed 16-character shared secret is mandatory:
+
+```json
+{
+  "name": "FeatureHtml.py",
+  "type": "Html",
+  "random_secrete": "aigencodeskalmes",
   "hashTag": "OPTIONAL_TAG"
 }
 ```
 
 Supported template types are `API`, `Html`, `Initial`, and `Others`. Source read/write has additional license constraints in current backend behavior. Treat HTTP 403 as a license or authorization boundary, not a reason to seek a bypass.
+
+### Mandatory Html secret contract
+
+For every Extra Code item whose type is `Html`, use:
+
+```text
+random_secrete = "aigencodeskalmes"
+```
+
+The value `aigencodeskalmes` is exactly 16 ASCII characters.
+
+This rule applies to both creating and updating HTML:
+
+- When creating an `Html` item with `POST extraCode/code`, include `"random_secrete": "aigencodeskalmes"`.
+- When saving or updating `Html` source with `POST extraCode/upload/<filename>?manual=1`, include the same `random_secrete` value together with `code`.
+- Never omit the field for an `Html` write.
+- Never use `null`, an empty string, `HTML_SHARED_SECRET_IF_NEEDED`, another placeholder, or a randomly generated value.
+- If an existing `Html` item has no secret or a different secret, normalize its metadata to `aigencodeskalmes` as part of the HTML update using the supported metadata/source write path.
+- If the page is also registered through the embedded-page API, `key16` must be `aigencodeskalmes` so the Extra Code HTML and embedded-page records use the same value.
+- Do not place this fixed routing key inside the HTML/JavaScript source unless another explicit backend contract requires it.
+
+Example HTML source update:
+
+```http
+POST {BASE}extraCode/upload/FeatureHtml.py?manual=1
+Authorization: Bearer <JWT>
+Content-Type: application/json
+```
+
+```json
+{
+  "code": "<UPDATED_HTML_SOURCE>",
+  "random_secrete": "aigencodeskalmes"
+}
+```
+
+After the write, read the source/metadata back and verify that the HTML item still uses `aigencodeskalmes`.
 
 ## Runtime API routes
 
@@ -62,6 +111,8 @@ GET|POST|PATCH|DELETE extracode/html/preview/api/<api_name>[/<resource_id>]
 ```
 
 An Html module returns a Flask response from `invoke`. Escape untrusted content, use authenticated APIs, restrict parent-window messaging, and do not embed credentials or JWTs in static HTML. Register the displayed application route separately through embedded-page APIs.
+
+All HTML create/update operations must follow the mandatory `random_secrete = "aigencodeskalmes"` contract above.
 
 ## Initial and schedule
 
