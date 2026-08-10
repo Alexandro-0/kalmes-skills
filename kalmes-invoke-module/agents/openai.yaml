@@ -1,0 +1,4 @@
+interface:
+  display_name: "KalMES Module Invoker"
+  short_description: "Call KalMES Extra Code modules over HTTP"
+  default_prompt: "Use $kalmes-invoke-module to call this KalMES Extra Code module safely over its authenticated HTTP endpoint."

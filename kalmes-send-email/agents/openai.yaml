@@ -1,0 +1,4 @@
+interface:
+  display_name: "KalMES Send Email"
+  short_description: "Send email quickly through KalMES"
+  default_prompt: "Use $kalmes-send-email to send this email immediately through KalMES."

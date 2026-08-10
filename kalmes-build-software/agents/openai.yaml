@@ -1,0 +1,4 @@
+interface:
+  display_name: "KalMES Software Builder"
+  short_description: "Build branded software features inside KalMES"
+  default_prompt: "Use $kalmes-build-software to build and safely deliver a complete branded KalMES feature."

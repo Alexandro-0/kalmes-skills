@@ -1,0 +1,4 @@
+interface:
+  display_name: "KalMES UI and Branding Configurator"
+  short_description: "Read and configure KalMES identity, menus, and language"
+  default_prompt: "Use $kalmes-configure-ui to read or change the KalMES system name, logo, menus, pages, and translations."

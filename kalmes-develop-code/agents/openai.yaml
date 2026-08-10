@@ -1,0 +1,4 @@
+interface:
+  display_name: "KalMES Code Developer"
+  short_description: "Read and build KalMES APIs, pages, jobs, and modules"
+  default_prompt: "Use $kalmes-develop-code to read or build this KalMES API, FAP page, scheduled job, or shared module."
