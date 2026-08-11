@@ -43,13 +43,7 @@ For smaller UI/access changes, save the exact original config fields and embedde
 
 ## Plugin packaging and activation
 
-```text
-POST event/plugin/pack          JSON manifest; returns tar
-POST extracode/pluginPack       multipart tar
-POST event/activenpg            multipart encrypted tar
-```
-
-Typical manifest fields include `name`, `version`, `resources`, `envs`, `flat`, `expose`, and `fap_ds`. Use a new immutable version, list dependencies, exclude credentials, and verify imported code, pages, menu, language, data references, and initial actions.
+Use `$kalmes-transfer-plugin` to export, preflight, import, and verify plain or encrypted plugin tar packages. Treat import as a high-impact, non-transactional mutation that can overwrite code and definitions and automatically execute packaged `Initial` modules. Require an immutable version, non-secret package content, exact target backups, explicit confirmation, checksum evidence, read-back verification, and tested rollback.
 
 ## Rollback order
 

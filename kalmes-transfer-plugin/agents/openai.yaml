@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kalmes Plugin Transfer"
+  short_description: "Import and export Kalmes plugin tar packages"
+  default_prompt: "Use $kalmes-transfer-plugin to safely export or import this Kalmes plugin tar package."

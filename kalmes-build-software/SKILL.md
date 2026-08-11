@@ -31,8 +31,9 @@ Only when password fallback is used, tell the user before starting that they mus
 8. Configure requested system name/logo branding, register pages and menu structure, and update both language packs with `$kalmes-configure-ui`.
 9. Configure accounts, roles, category denial, action denial, and page roles with `$kalmes-manage-access`.
 10. Test success, validation, unauthorized, forbidden, retry, and rollback paths with `$kalmes-test-release`.
-11. If the user explicitly wants the internal Kalmes Agent queue to continue work, create and run it with `$kalmes-manage-subtasks`; do not substitute that queue for ordinary Codex implementation.
-12. Summarize plugin code, definitions, changed resources, endpoint/module names, roles, tests, rollback instructions, and unresolved risks. Require password replacement and session revocation only when password fallback was used.
+11. When a portable release is requested, export, inspect, transfer, import, and verify its plugin tar with `$kalmes-transfer-plugin`; never upload a pack merely to inspect it.
+12. If the user explicitly wants the internal Kalmes Agent queue to continue work, create and run it with `$kalmes-manage-subtasks`; do not substitute that queue for ordinary Codex implementation.
+13. Summarize plugin code, definitions, changed resources, endpoint/module names, roles, tests, rollback instructions, and unresolved risks. Require password replacement and session revocation only when password fallback was used.
 
 ## Change discipline
 
@@ -45,4 +46,4 @@ Only when password fallback is used, tell the user before starting that they mus
 
 ## Definition of done
 
-Require all applicable items: verified plugin code and FAP definitions, persisted data, validated API, working HTML/page, verified system name/logo branding, registered menu, two language packs, enforced roles, file handling, scheduled behavior, negative tests, version/backup, release evidence, rollback steps, and credential-rotation reminder.
+Require all applicable items: verified plugin code and FAP definitions, persisted data, validated API, working HTML/page, verified system name/logo branding, registered menu, two language packs, enforced roles, file handling, scheduled behavior, negative tests, version/backup, inspected portable plugin pack when requested, release evidence, rollback steps, and credential-rotation reminder.

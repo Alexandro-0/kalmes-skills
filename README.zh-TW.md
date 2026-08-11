@@ -28,6 +28,7 @@ kalmes-build-software
     ├── kalmes-develop-code
     ├── kalmes-configure-ui
     ├── kalmes-manage-access
+    ├── kalmes-transfer-plugin
     └── kalmes-test-release
 ```
 
@@ -84,9 +85,10 @@ AI Agent 可以依照當前任務選擇適合的 Skill，只有在需要時才�
 
 ## Testing & Release
 
-| Skill                                          | 用途                                                   |
-| ---------------------------------------------- | ------------------------------------------------------ |
-| [`kalmes-test-release`](./kalmes-test-release) | 驗證、封裝、Release、監控與 Rollback Kalmes 自訂功能。 |
+| Skill                                                | 用途                                                                                               |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [`kalmes-transfer-plugin`](./kalmes-transfer-plugin) | 安全地匯出、預檢、匯入、驗證及回滾一般或加密的 Kalmes Plugin tar 套件。                            |
+| [`kalmes-test-release`](./kalmes-test-release)       | 驗證、封裝、Release、監控與 Rollback Kalmes 自訂功能。                                             |
 
 ---
 
@@ -199,6 +201,7 @@ kalmes-build-software
         ├── kalmes-develop-code
         ├── kalmes-configure-ui
         ├── kalmes-manage-access
+        ├── kalmes-transfer-plugin
         └── kalmes-test-release
 ```
 

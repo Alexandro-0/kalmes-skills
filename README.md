@@ -28,6 +28,7 @@ kalmes-build-software
     ├── kalmes-develop-code
     ├── kalmes-configure-ui
     ├── kalmes-manage-access
+    ├── kalmes-transfer-plugin
     └── kalmes-test-release
 ```
 
@@ -84,9 +85,10 @@ This allows Kalmes-related knowledge to remain:
 
 ## Testing & Release
 
-| Skill                                          | Purpose                                                                  |
-| ---------------------------------------------- | ------------------------------------------------------------------------ |
-| [`kalmes-test-release`](./kalmes-test-release) | Verify, package, release, monitor, and roll back Kalmes custom features. |
+| Skill                                                | Purpose                                                                                                      |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| [`kalmes-transfer-plugin`](./kalmes-transfer-plugin) | Safely export, preflight, import, verify, and roll back plain or encrypted Kalmes plugin tar packages.       |
+| [`kalmes-test-release`](./kalmes-test-release)       | Verify, package, release, monitor, and roll back Kalmes custom features.                                     |
 
 ---
 
@@ -192,6 +194,7 @@ kalmes-build-software
         ├── kalmes-develop-code
         ├── kalmes-configure-ui
         ├── kalmes-manage-access
+        ├── kalmes-transfer-plugin
         └── kalmes-test-release
 ```
 
