@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kalmes Skills Updater"
+  short_description: "Safely sync, edit, validate, and publish Kalmes Skills"
+  default_prompt: "Use $kalmes-update-skills to safely update and validate the canonical Kalmes Skills repository."

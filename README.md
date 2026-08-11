@@ -90,6 +90,12 @@ This allows Kalmes-related knowledge to remain:
 | [`kalmes-transfer-plugin`](./kalmes-transfer-plugin) | Safely export, preflight, import, verify, and roll back plain or encrypted Kalmes plugin tar packages.       |
 | [`kalmes-test-release`](./kalmes-test-release)       | Verify, package, release, monitor, and roll back Kalmes custom features.                                     |
 
+## Skill Maintenance
+
+| Skill                                            | Purpose                                                                                                      |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| [`kalmes-update-skills`](./kalmes-update-skills) | Safely synchronize, edit, validate, install, and explicitly publish the canonical Kalmes Skills repository. |
+
 ---
 
 # Repository Structure

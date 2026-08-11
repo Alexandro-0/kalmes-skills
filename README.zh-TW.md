@@ -90,6 +90,12 @@ AI Agent 可以依照當前任務選擇適合的 Skill，只有在需要時才�
 | [`kalmes-transfer-plugin`](./kalmes-transfer-plugin) | 安全地匯出、預檢、匯入、驗證及回滾一般或加密的 Kalmes Plugin tar 套件。                            |
 | [`kalmes-test-release`](./kalmes-test-release)       | 驗證、封裝、Release、監控與 Rollback Kalmes 自訂功能。                                             |
 
+## Skill Maintenance
+
+| Skill                                            | 用途                                                                                          |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| [`kalmes-update-skills`](./kalmes-update-skills) | 安全地同步、編輯、驗證、安裝，並在明確授權後發布 canonical Kalmes Skills Repository。        |
+
 ---
 
 # Repository 結構
