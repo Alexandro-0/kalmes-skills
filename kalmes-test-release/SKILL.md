@@ -1,13 +1,13 @@
 ---
 name: kalmes-test-release
-description: Verify, package, release, monitor, and roll back KalMES custom features, including FAP definitions, Extra Code APIs and HTML, data, schedules, menus, languages, roles, files, source versions, config packs, and plugin packs. Use before or after deploying a KalMES feature, diagnosing a failed release, preparing a plugin, or proving acceptance and recovery.
+description: Verify, package, release, monitor, and roll back Kalmes custom features, including FAP definitions, Extra Code APIs and HTML, data, schedules, menus, languages, roles, files, source versions, config packs, and plugin packs. Use before or after deploying a Kalmes feature, diagnosing a failed release, preparing a plugin, or proving acceptance and recovery.
 ---
 
-# Test and Release KalMES Features
+# Test and Release Kalmes Features
 
 ## Connection gate
 
-Require the KalMES URL, account, and password before live tests or release operations. Ask for missing values and identify the environment. Never persist or echo credentials, JWTs, source secrets, plugin secrets, or config encryption material. Tell the user before work and at handoff to replace the supplied password and revoke its sessions.
+Require the Kalmes URL, target environment, and an API key (preferred) or account/password fallback before live tests or release operations. Ask for an API key first when authentication is missing. Never persist or echo credentials, JWTs, source secrets, plugin secrets, or config encryption material. Only when password fallback is used, tell the user before work and at handoff to replace the password and revoke its sessions.
 
 Production releases, plugin activation, config import, code execution, data cleanup, and rollback are high impact. Require an approved change set, backup, maintenance expectations, and explicit confirmation immediately before the high-impact mutation.
 
@@ -31,4 +31,4 @@ Do not approve production release when any applicable item lacks evidence: serve
 
 ## Completion
 
-Return a concise release record: environment, versions, changed IDs/routes, test matrix, results, remaining risks, monitoring, and rollback. Never include secrets. Require immediate replacement of the supplied password and session revocation.
+Return a concise release record: environment, versions, changed IDs/routes, test matrix, results, remaining risks, monitoring, and rollback. Never include secrets. Require immediate password replacement and session revocation only if password fallback was used.

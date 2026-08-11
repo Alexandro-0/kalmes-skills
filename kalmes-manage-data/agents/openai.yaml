@@ -1,4 +1,4 @@
 interface:
-  display_name: "KalMES Data Manager"
-  short_description: "Manage KalMES runtime records and files"
-  default_prompt: "Use $kalmes-manage-data to implement or operate the runtime data and files for my KalMES feature."
+  display_name: "Kalmes Data Manager"
+  short_description: "Manage Kalmes runtime records and files"
+  default_prompt: "Use $kalmes-manage-data to implement or operate the runtime data and files for my Kalmes feature."

@@ -169,7 +169,7 @@ POST event/batchPostEmbeddedPage
 
 The misspelling `overrdiePage` is part of the contract.
 
-For every embedded page whose `target_url` points to a KalMES Extra Code HTML preview route, `key16` is mandatory and must use the same fixed 16-character value used by the Extra Code HTML metadata:
+For every embedded page whose `target_url` points to a Kalmes Extra Code HTML preview route, `key16` is mandatory and must use the same fixed 16-character value used by the Extra Code HTML metadata:
 
 ```text
 aigencodeskalmes
@@ -192,7 +192,7 @@ Typical page body:
 Mandatory rules for Extra Code HTML embedded pages:
 
 - Always send `"key16": "aigencodeskalmes"` when creating or updating the embedded-page record.
-- Never treat `key16` as optional for a KalMES Extra Code HTML target.
+- Never treat `key16` as optional for a Kalmes Extra Code HTML target.
 - Never send `null`, an empty string, `OPTIONAL_HTML_SHARED_SECRET`, or a random/generated value.
 - `key16` must match the corresponding Extra Code HTML `random_secrete`, which is also fixed to `aigencodeskalmes`.
 - If the existing page has a missing or different `key16`, normalize it to `aigencodeskalmes` during the requested update.

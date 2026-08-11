@@ -1,4 +1,4 @@
-# KalMES data and file API
+# Kalmes data and file API
 
 All routes below are relative to `{BASE}` and, except ping/public exceptions, use `Authorization: Bearer <JWT>`.
 
@@ -19,7 +19,7 @@ GET    versions/<column>/<id>
 
 Known schema-backed columns include `account`, `assets`, `config`, `extra_code`, `iot_device`, and `resource`; deployments may add more. Inspect before use.
 
-The `GET base/config` response is encrypted into `enc_val` for the web client. Prefer the existing KalMES client/config workflow when decoding is required; never invent a key.
+The `GET base/config` response is encrypted into `enc_val` for the web client. Prefer the existing Kalmes client/config workflow when decoding is required; never invent a key.
 
 ## Record collections
 

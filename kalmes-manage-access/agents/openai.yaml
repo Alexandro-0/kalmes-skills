@@ -1,4 +1,4 @@
 interface:
-  display_name: "KalMES Access Manager"
+  display_name: "Kalmes Access Manager"
   short_description: "Manage users, roles, and page permissions"
-  default_prompt: "Use $kalmes-manage-access to configure KalMES users, roles, and permissions."
+  default_prompt: "Use $kalmes-manage-access to configure Kalmes users, roles, and permissions."

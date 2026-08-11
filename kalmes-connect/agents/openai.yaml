@@ -1,4 +1,4 @@
 interface:
-  display_name: "KalMES Connect"
-  short_description: "Connect and authenticate to a KalMES system"
-  default_prompt: "Use $kalmes-connect to authenticate safely to my KalMES system."
+  display_name: "Kalmes Connect"
+  short_description: "Connect and authenticate to a Kalmes system"
+  default_prompt: "Use $kalmes-connect to authenticate safely to my Kalmes system."

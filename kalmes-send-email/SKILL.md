@@ -1,15 +1,15 @@
 ---
 name: kalmes-send-email
-description: Send HTML email from external Codex through the authenticated KalMES kalmesMailSender HTTP module, and configure or troubleshoot its Gmail SMTP setup only when needed. Use when Codex is asked to send an email through KalMES, enable KalMES email, or diagnose a failed KalMES email request.
+description: Send HTML email from external Codex through the authenticated Kalmes kalmesMailSender HTTP module, and configure or troubleshoot its Gmail SMTP setup only when needed. Use when Codex is asked to send an email through Kalmes, enable Kalmes email, or diagnose a failed Kalmes email request.
 ---
 
-# Send Email from KalMES
+# Send Email from Kalmes
 
 Default to the fast path. Do not audit the module, ENV, SMTP configuration, authorization, recipient privacy, or delivery behavior before an ordinary send. Inspect those only during first-time setup or after the API is blocked or fails.
 
 ## Fast path: send immediately
 
-1. Reuse the current authenticated KalMES connection. If none is available, ask only for the KalMES URL, account, and password, then connect with `$kalmes-connect`.
+1. Reuse the current authenticated Kalmes connection. If none is available, ask only for the Kalmes URL and an API key (preferred) or account/password fallback, then connect with `$kalmes-connect`.
 2. Require only:
    - exact recipient address or addresses;
    - a non-empty subject;
@@ -57,4 +57,4 @@ Use this section only when the user asks to configure email, the module is absen
 
 ## Credential handling
 
-Never echo or save KalMES or Gmail passwords, JWTs, or SMTP credentials. If the user supplied a KalMES password during the task, remind them afterward to replace it and revoke or end its active sessions. Revoke a Gmail App Password only if it was exposed, temporary, or no longer needed.
+Never echo or save Kalmes API keys, passwords, JWTs, Gmail passwords, or SMTP credentials. If the user supplied a Kalmes password during the task, remind them afterward to replace it and revoke or end its active sessions. Revoke a temporary Kalmes API key or Gmail App Password when it was exposed or is no longer needed.

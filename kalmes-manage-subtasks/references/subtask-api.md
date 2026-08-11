@@ -1,6 +1,6 @@
-# KalMES Agent Sub Task HTTP API
+# Kalmes Agent Sub Task HTTP API
 
-All routes are relative to the authenticated KalMES API root.
+All routes are relative to the authenticated Kalmes API root.
 
 ## Discover internal skill keys
 

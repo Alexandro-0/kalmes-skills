@@ -2,7 +2,7 @@
 
 ## Runtime model
 
-Build one HTML document containing its CSS and JavaScript. KalMES renders it inside a same-origin iframe. Do not embed credentials or JWTs.
+Build one HTML document containing its CSS and JavaScript. Kalmes renders it inside a same-origin iframe. Do not embed credentials or JWTs.
 
 Include the helper exactly as supported by the target deployment; the standard current form is:
 

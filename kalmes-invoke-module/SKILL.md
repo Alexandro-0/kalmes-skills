@@ -1,15 +1,15 @@
 ---
 name: kalmes-invoke-module
-description: Invoke an existing KalMES Extra Code API module over authenticated HTTP with GET, POST, PATCH, or DELETE, including query parameters, payloads, resource IDs, and bounded response projection. Use when a user asks Codex outside KalMES to run or call a KalMES module, exercise a generated collection API, reproduce the internal UseModules or tool_run_api_module behavior, or interact with module-backed collection data.
+description: Invoke an existing Kalmes Extra Code API module over authenticated HTTP with GET, POST, PATCH, or DELETE, including query parameters, payloads, resource IDs, and bounded response projection. Use when a user asks Codex outside Kalmes to run or call a Kalmes module, exercise a generated collection API, reproduce the internal UseModules or tool_run_api_module behavior, or interact with module-backed collection data.
 ---
 
-# Invoke a KalMES Module
+# Invoke a Kalmes Module
 
 Translate the web Agent's internal module tool into a normal authenticated HTTP request. Never assume that `tool_run_api_module` exists in external Codex.
 
 ## Preconditions
 
-Require the KalMES URL, account, password, target environment, exact module name, HTTP method, and intended operation. Authenticate with `$kalmes-connect`.
+Require the Kalmes URL, target environment, exact module name, HTTP method, intended operation, and an API key (preferred) or account/password fallback. Ask for an API key first when authentication is missing, then authenticate with `$kalmes-connect`.
 
 For module and collection discovery, read the definition with `$kalmes-manage-fap`. For request construction, read [references/module-http.md](references/module-http.md).
 
@@ -25,11 +25,11 @@ For module and collection discovery, read the definition with `$kalmes-manage-fa
 
 ## Boundaries
 
-- The internal tool's `filter_key` is not a standard KalMES HTTP parameter. Use server-supported filters and then project fields in Codex.
-- Do not import or execute server Python modules in the local Codex process as a substitute for calling the target KalMES system.
+- The internal tool's `filter_key` is not a standard Kalmes HTTP parameter. Use server-supported filters and then project fields in Codex.
+- Do not import or execute server Python modules in the local Codex process as a substitute for calling the target Kalmes system.
 - Do not use a module merely because its filename exists. Confirm it implements the API `invoke` contract and is intended to be exposed.
 - Use `$kalmes-analyze-data` for multi-collection read-only analysis and `$kalmes-develop-code` when the needed module does not exist.
 
 ## Completion
 
-Report module, method, endpoint shape, non-secret filters, status, affected or returned record count, and any uncertain side effect. If a KalMES password was supplied, require immediate replacement and session revocation.
+Report module, method, endpoint shape, non-secret filters, status, affected or returned record count, and any uncertain side effect. If a Kalmes password was supplied, require immediate replacement and session revocation.

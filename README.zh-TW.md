@@ -394,11 +394,14 @@ Committed Configuration
 
 建議優先使用：
 
+- Agent 專用的 Kalmes API Key，不要直接提供帳號密碼
 - Temporary Credential
 - Environment Variable
 - Secret Management System
 - Least-Privilege Account
 - Environment-specific Account
+
+請依管理者角色，從 **進階設定 → API Keys** 或 **API Access → API Keys** 建立 Agent Key，只綁定工作所需的 SuperUser、Admin 或 IT 帳號，將 64 字元 Key 存入 Secret Manager，並撤銷臨時或已暴露的 Key。帳號密碼登入僅作為備援方式。
 
 Production Environment 的操作應搭配適當的：
 

@@ -25,7 +25,7 @@ Do not begin writes from a vague request. Produce a concise change set and accep
 
 ## 2. Architecture mapping
 
-| Requirement | KalMES surface |
+| Requirement | Kalmes surface |
 |---|---|
 | FAP collection definition and relationships | `extracode/dataManagementConfigApi` |
 | Schema-backed system entity | `base/<column>` and server `schema/*.json` |

@@ -1,4 +1,4 @@
 interface:
-  display_name: "KalMES Subtask Queue Manager"
-  short_description: "Create, run, and update KalMES agent subtasks"
-  default_prompt: "Use $kalmes-manage-subtasks to create, execute, or update this KalMES internal agent subtask queue."
+  display_name: "Kalmes Subtask Queue Manager"
+  short_description: "Create, run, and update Kalmes agent subtasks"
+  default_prompt: "Use $kalmes-manage-subtasks to create, execute, or update this Kalmes internal agent subtask queue."

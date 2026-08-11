@@ -1,4 +1,4 @@
 interface:
-  display_name: "KalMES FAP Collection Designer"
+  display_name: "Kalmes FAP Collection Designer"
   short_description: "Design and maintain FAP collection definitions"
-  default_prompt: "Use $kalmes-manage-fap to design or update the FAP collection definitions for this KalMES feature."
+  default_prompt: "Use $kalmes-manage-fap to design or update the FAP collection definitions for this Kalmes feature."

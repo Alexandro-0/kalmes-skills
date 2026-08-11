@@ -1,4 +1,4 @@
 interface:
-  display_name: "KalMES Test and Release"
+  display_name: "Kalmes Test and Release"
   short_description: "Test, package, release, and roll back features"
-  default_prompt: "Use $kalmes-test-release to verify and release a KalMES feature safely."
+  default_prompt: "Use $kalmes-test-release to verify and release a Kalmes feature safely."

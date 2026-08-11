@@ -1,4 +1,4 @@
-# KalMES test, release, and rollback reference
+# Kalmes test, release, and rollback reference
 
 ## Test matrix
 

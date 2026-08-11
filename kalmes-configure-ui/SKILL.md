@@ -1,23 +1,23 @@
 ---
 name: kalmes-configure-ui
-description: Read or configure KalMES branding, displayed system name, logo, embedded pages, menu categories and ordering, routes, labels, and two language packs. Use when identifying the live KalMES system name, replacing its name or logo, adding a custom HTML page, reorganizing menus, creating menu categories, changing translations, or resetting language and sign-in page configuration.
+description: Read or configure Kalmes branding, displayed system name, logo, embedded pages, menu categories and ordering, routes, labels, and two language packs. Use when identifying the live Kalmes system name, replacing its name or logo, adding a custom HTML page, reorganizing menus, creating menu categories, changing translations, or resetting language and sign-in page configuration.
 ---
 
-# Configure KalMES UI
+# Configure Kalmes UI
 
 ## Read-only system identity
 
-For a request that only asks for the displayed KalMES system name or logo, call `GET event/signin/page_url` and return `data.title` and, when requested, `data.logo`. This public sign-in response is the smallest supported read path and is not authorization evidence. Do not collect a password when this response fully answers the request.
+For a request that only asks for the displayed Kalmes system name or logo, call `GET event/signin/page_url` and return `data.title` and, when requested, `data.logo`. This public sign-in response is the smallest supported read path and is not authorization evidence. Do not collect a password when this response fully answers the request.
 
 ## Connection rule
 
-Require the KalMES URL, account, and password before protected reads or any writes. Ask when missing. Never persist or echo credentials/JWTs. Warn before starting and at completion that the supplied password must be replaced and its sessions revoked.
+Require the Kalmes URL and an API key (preferred) or account/password fallback before protected reads or writes. Ask for an API key first when authentication is missing. Never persist or echo credentials/JWTs. Only when password fallback is used, warn before starting and at completion that the supplied password must be replaced and its sessions revoked.
 
 Authenticate with `$kalmes-connect`, then read [references/ui-api.md](references/ui-api.md).
 
 ## Mandatory HTML embedded-page key
 
-Every embedded page that targets a KalMES Extra Code `Html` route MUST use this fixed 16-character `key16` value:
+Every embedded page that targets a Kalmes Extra Code `Html` route MUST use this fixed 16-character `key16` value:
 
 ```text
 aigencodeskalmes
@@ -57,4 +57,4 @@ Rules:
 
 ## Completion
 
-Report previous/new system name and logo URL without sensitive data, page route, target URL, menu category/order, language keys, roles, tests, and rollback. Do not expose `key16` or the HTML shared key in the report. Require immediate password replacement and session revocation.
+Report previous/new system name and logo URL without sensitive data, page route, target URL, menu category/order, language keys, roles, tests, and rollback. Do not expose `key16` or the HTML shared key in the report. Require immediate password replacement and session revocation only if password fallback was used.

@@ -1,13 +1,13 @@
 ---
 name: kalmes-manage-data
-description: Design and operate KalMES runtime feature data using schema-driven base CRUD, record collections, query filters, embedded values, history, and file resources. Use when creating or modifying KalMES business records, imports, attachments, audit history, or API persistence. Use kalmes-manage-fap instead for FAP collection definitions and kalmes-analyze-data for read-only analysis.
+description: Design and operate Kalmes runtime feature data using schema-driven base CRUD, record collections, query filters, embedded values, history, and file resources. Use when creating or modifying Kalmes business records, imports, attachments, audit history, or API persistence. Use kalmes-manage-fap instead for FAP collection definitions and kalmes-analyze-data for read-only analysis.
 ---
 
-# Manage KalMES Data
+# Manage Kalmes Data
 
 ## Connection and credential rule
 
-Require the KalMES URL, account, and password before inspecting or changing a live system. Ask for missing values. Never persist or echo credentials or JWTs. Tell the user before work and at completion that the supplied password must be replaced and its sessions revoked.
+Require the Kalmes URL and an API key (preferred) or account/password fallback before inspecting or changing a live system. Ask for an API key first when authentication is missing. Never persist or echo credentials or JWTs. Only when password fallback is used, tell the user before work and at completion that the supplied password must be replaced and its sessions revoked.
 
 Authenticate with `$kalmes-connect`, then read [references/data-api.md](references/data-api.md).
 
@@ -35,4 +35,4 @@ Authenticate with `$kalmes-connect`, then read [references/data-api.md](referenc
 
 ## Completion
 
-Report collections, fields, IDs, queries, files, validation results, and rollback steps without exposing secrets. Require immediate replacement of the supplied password and session revocation.
+Report collections, fields, IDs, queries, files, validation results, and rollback steps without exposing secrets. Require immediate password replacement and session revocation only if password fallback was used.

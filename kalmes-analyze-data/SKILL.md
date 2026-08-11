@@ -1,15 +1,15 @@
 ---
 name: kalmes-analyze-data
-description: Perform read-only discovery, querying, joining, summarization, and analysis of KalMES collection data and operation history through existing collection modules. Use when a user asks to inspect records, analyze trends, compare collections, query audit or historical activity, explain KalMES data, or export a readable table without changing live data.
+description: Perform read-only discovery, querying, joining, summarization, and analysis of Kalmes collection data and operation history through existing collection modules. Use when a user asks to inspect records, analyze trends, compare collections, query audit or historical activity, explain Kalmes data, or export a readable table without changing live data.
 ---
 
-# Analyze KalMES Data
+# Analyze Kalmes Data
 
 Keep this workflow read-only. If fulfilling the request requires creating, updating, deleting, or running code with side effects, stop and route that part to the appropriate mutation skill.
 
 ## Connection and scope
 
-Require the KalMES API URL, account, password, target environment, requested business scope, and intended output. Authenticate with `$kalmes-connect`. Apply least privilege and do not expose records beyond the user's requested administrative scope.
+Require the Kalmes API URL, target environment, requested business scope, intended output, and an API key (preferred) or account/password fallback. Ask for an API key first when authentication is missing, then authenticate with `$kalmes-connect`. Apply least privilege and do not expose records beyond the user's requested administrative scope.
 
 Read [references/analysis-workflow.md](references/analysis-workflow.md) before querying.
 
@@ -34,4 +34,4 @@ Read [references/analysis-workflow.md](references/analysis-workflow.md) before q
 
 ## Completion
 
-Report the collections and modules queried, time range and timezone, filters, row counts, result, assumptions, and any missing coverage. Require immediate replacement of the supplied password and session revocation.
+Report the collections and modules queried, time range and timezone, filters, row counts, result, assumptions, and any missing coverage. Require immediate password replacement and session revocation only if password fallback was used.

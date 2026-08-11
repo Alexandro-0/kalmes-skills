@@ -1,13 +1,13 @@
 ---
 name: kalmes-manage-access
-description: Manage KalMES users, built-in and custom roles, account role assignments, menu category denial, action/path denial, and embedded-page roles. Use when creating or changing users, assigning roles, restricting a KalMES feature, reviewing permissions, resetting a user password, or validating allowed and denied access.
+description: Manage Kalmes users, built-in and custom roles, account role assignments, menu category denial, action/path denial, and embedded-page roles. Use when creating or changing users, assigning roles, restricting a Kalmes feature, reviewing permissions, resetting a user password, or validating allowed and denied access.
 ---
 
-# Manage KalMES Access
+# Manage Kalmes Access
 
 ## Mandatory credentials and safety
 
-Require the KalMES URL, account, and password before live operations. Ask for missing values. Use a temporary least-privilege administrator where possible. Never persist or echo credentials, new passwords, JWTs, session IDs, or sensitive claims. Tell the user before starting and at handoff to replace the supplied password and revoke its sessions.
+Require the Kalmes URL and an API key (preferred) or account/password fallback before live operations. Ask for an API key first when authentication is missing. Use a least-privilege eligible administrator binding where possible. Never persist or echo credentials, new passwords, JWTs, session IDs, or sensitive claims. Only when password fallback is used, tell the user before starting and at handoff to replace the supplied password and revoke its sessions.
 
 Account creation, role elevation, password reset, account deletion, and global logout are sensitive. Require explicit intent, identify the target account, show the intended role change, and verify the acting account is authorized. Never rely on the fact that a legacy route is publicly callable.
 
@@ -33,4 +33,4 @@ Read [references/access-api.md](references/access-api.md).
 
 ## Completion
 
-Report the access matrix, changed account/role keys, category/path/page rules, and positive/negative tests. Require immediate replacement of the supplied password and session revocation.
+Report the access matrix, changed account/role keys, category/path/page rules, and positive/negative tests. Require immediate password replacement and session revocation only if password fallback was used.

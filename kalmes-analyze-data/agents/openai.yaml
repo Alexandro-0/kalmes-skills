@@ -1,4 +1,4 @@
 interface:
-  display_name: "KalMES Data Analyst"
-  short_description: "Analyze KalMES collection and history data"
-  default_prompt: "Use $kalmes-analyze-data to inspect and explain the requested KalMES collection or history data without modifying it."
+  display_name: "Kalmes Data Analyst"
+  short_description: "Analyze Kalmes collection and history data"
+  default_prompt: "Use $kalmes-analyze-data to inspect and explain the requested Kalmes collection or history data without modifying it."

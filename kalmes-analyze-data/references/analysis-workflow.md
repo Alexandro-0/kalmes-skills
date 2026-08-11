@@ -1,4 +1,4 @@
-# KalMES read-only analysis workflow
+# Kalmes read-only analysis workflow
 
 ## Query plan
 

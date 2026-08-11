@@ -378,11 +378,14 @@ public documentation
 
 Prefer:
 
+- a dedicated Kalmes API key for Agents instead of an account password
 - temporary credentials
 - environment variables
 - secret-management systems
 - least-privilege accounts
 - environment-specific accounts
+
+Create Agent keys in **Advanced Settings → API Keys** or **API Access → API Keys**, depending on the manager role. Bind only the required SuperUser, Admin, or IT account, store the 64-character key in a Secret Manager, and revoke temporary or exposed keys. Use account/password login only as a fallback.
 
 Production operations should use appropriate:
 

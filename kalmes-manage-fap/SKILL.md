@@ -1,15 +1,15 @@
 ---
 name: kalmes-manage-fap
-description: Inspect, design, create, update, and retire KalMES FAP collection definitions, including plugin ownership, bilingual fields, role permissions, references, embedded values, and master-detail sheet relationships. Use when a user mentions FAP, Collection definitions, dataManagement_config, collection columns, collectionName, plugin schemas, sheet or redirect relationships, or asks to change the data structure behind a KalMES feature.
+description: Inspect, design, create, update, and retire Kalmes FAP collection definitions, including plugin ownership, bilingual fields, role permissions, references, embedded values, and master-detail sheet relationships. Use when a user mentions FAP, Collection definitions, dataManagement_config, collection columns, collectionName, plugin schemas, sheet or redirect relationships, or asks to change the data structure behind a Kalmes feature.
 ---
 
-# Manage KalMES FAP Collections
+# Manage Kalmes FAP Collections
 
-Manage collection definitions through the authenticated KalMES HTTP API. Do not depend on the web Agent's internal `ReadCollectionInfo` or `updateFapCollection` tools.
+Manage collection definitions through the authenticated Kalmes HTTP API. Do not depend on the web Agent's internal `ReadCollectionInfo` or `updateFapCollection` tools.
 
 ## Connection gate
 
-Require the KalMES API URL, account, password, and target environment before protected reads or writes. Authenticate with `$kalmes-connect`; never persist or echo credentials or JWTs.
+Require the Kalmes API URL, target environment, and an API key (preferred) or account/password fallback before protected reads or writes. Ask for an API key first when authentication is missing. Authenticate with `$kalmes-connect`; never persist or echo credentials or JWTs.
 
 Read [references/fap-collections.md](references/fap-collections.md) before designing or mutating a definition.
 
@@ -34,4 +34,4 @@ Read [references/fap-collections.md](references/fap-collections.md) before desig
 
 ## Completion
 
-Report plugin code, created or updated collection names and IDs, relationship graph, role matrix, API module names, verification results, rollback material, and any definition that could not be safely changed. Require immediate replacement of the supplied password and session revocation.
+Report plugin code, created or updated collection names and IDs, relationship graph, role matrix, API module names, verification results, rollback material, and any definition that could not be safely changed. Require immediate password replacement and session revocation only if password fallback was used.

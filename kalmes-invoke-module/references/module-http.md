@@ -1,6 +1,6 @@
 # Extra Code module HTTP contract
 
-Let `{BASE}` be the authenticated KalMES API root, normally `https://host/<project>/api/`.
+Let `{BASE}` be the authenticated Kalmes API root, normally `https://host/<project>/api/`.
 
 ## Route
 
