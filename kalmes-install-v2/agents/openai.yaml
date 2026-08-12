@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kalmes V2 Installer"
+  short_description: "Install Docker and deploy Kalmes V2 safely"
+  default_prompt: "Use $kalmes-install-v2 to install Docker and deploy Kalmes V2 on this computer."

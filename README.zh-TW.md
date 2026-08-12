@@ -47,6 +47,12 @@ AI Agent 可以依照當前任務選擇適合的 Skill，只有在需要時才�
 
 # Skill 清單
 
+## Installation
+
+| Skill                                      | 用途                                                                                         |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| [`kalmes-install-v2`](./kalmes-install-v2) | 在 Windows、macOS 或 Linux 安裝 Docker 與部署 Kalmes V2，並驗證容器及系統就緒狀態。           |
+
 ## Orchestration
 
 | Skill                                              | 用途                                                                                                     |

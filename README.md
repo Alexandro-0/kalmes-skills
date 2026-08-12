@@ -47,6 +47,12 @@ This allows Kalmes-related knowledge to remain:
 
 # Skill Catalog
 
+## Installation
+
+| Skill                                          | Purpose                                                                                                      |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| [`kalmes-install-v2`](./kalmes-install-v2)     | Install Docker and deploy Kalmes V2 on Windows, macOS, or Linux, then validate the containers and readiness. |
+
 ## Orchestration
 
 | Skill                                              | Purpose                                                                                                                                                         |
