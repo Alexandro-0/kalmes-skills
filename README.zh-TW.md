@@ -65,6 +65,7 @@ AI Agent 可以依照當前任務選擇適合的 Skill，只有在需要時才�
 | ------------------------------------------------ | ------------------------------------------------------------------------ |
 | [`kalmes-connect`](./kalmes-connect)             | 連線並驗證 Kalmes HTTP API、確認系統可用狀態，並安全地管理登入 Session。 |
 | [`kalmes-invoke-module`](./kalmes-invoke-module) | 透過已驗證的 HTTP Request 呼叫既有的 Kalmes Extra Code API Module。      |
+| [`kalmes-get-api-error-events`](./kalmes-get-api-error-events) | 依時間範圍取得 API 5xx 異常事件，檢視帳號、擴充程式錯誤訊息與例外 stack。 |
 
 ## Data & FAP
 

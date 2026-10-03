@@ -65,6 +65,7 @@ This allows Kalmes-related knowledge to remain:
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
 | [`kalmes-connect`](./kalmes-connect)             | Connect and authenticate to a Kalmes HTTP API, validate readiness, and manage authenticated sessions safely. |
 | [`kalmes-invoke-module`](./kalmes-invoke-module) | Invoke existing Kalmes Extra Code API modules through authenticated HTTP requests.                           |
+| [`kalmes-get-api-error-events`](./kalmes-get-api-error-events) | Retrieve API 5xx events by time range, including accounts, Extra Code failures, and exception stacks. |
 
 ## Data & FAP
 

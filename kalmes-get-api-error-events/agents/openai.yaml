@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kalmes API Error Events"
+  short_description: "Query API failures, accounts, and exception stacks"
+  default_prompt: "Use $kalmes-get-api-error-events to retrieve recent Kalmes API errors and explain the relevant messages and exception stacks."
