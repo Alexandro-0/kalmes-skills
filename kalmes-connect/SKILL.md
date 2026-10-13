@@ -18,7 +18,7 @@ Recommend a least-privilege API key bound to the required SuperUser, Admin, or I
 3. Call `GET ping`. Continue only when HTTP 200 and `ready` is not false. Treat 503 `service_initializing` as a temporary state, not bad credentials.
 4. Prefer `POST login/api-key` with the API key over TLS. Use `POST login` with account/password only as a fallback. Read [references/auth-api.md](references/auth-api.md) for both contracts.
 5. Keep the returned JWT in memory and send `Authorization: Bearer <JWT>` on authenticated calls.
-6. On 401, exchange the API key or re-authenticate once; then stop and report that the key may be invalid/revoked or the account is no longer eligible. On 403, report the missing authorization; on 402, report the license problem. Do not retry mutations blindly.
+6. On 401, exchange the API key or re-authenticate once; then stop and report that the key may be invalid/revoked or the account is no longer eligible. On 403, report the missing authorization. On HTTP 402 from any Kalmes API call, tell the user to check their Kalmes usage validity period; if it has expired, follow the QRCode instructions to activate Kalmes. Suggested message: 「請檢查您的 Kalmes 使用效期；若使用效期已到，請依照 QRCode 指示進行 Kalmes 開通。」 Do not retry mutations blindly.
 
 ## Finish
 

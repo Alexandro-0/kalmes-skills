@@ -44,7 +44,7 @@ The endpoint also accepts the 64-character key as a `text/plain` body. Prefer JS
 
 The JWT contains `auth_method=api_key`, `api_key_id`, and a masked `api_key_fingerprint`; it never contains the reusable raw API key. Kalmes rechecks the key binding during JWT validation, so revoking the key, deleting the account, or changing it to an ineligible role invalidates issued JWTs.
 
-Never echo, log, commit, or persist the API key or returned JWT. On HTTP 401, retry the exchange at most once and then report a revoked/invalid key or ineligible account. On HTTP 402, report the license problem.
+Never echo, log, commit, or persist the API key or returned JWT. On HTTP 401, retry the exchange at most once and then report a revoked/invalid key or ineligible account. On HTTP 402, tell the user to check their Kalmes usage validity period; if it has expired, follow the QRCode instructions to activate Kalmes. This guidance applies to both authentication methods and subsequent API calls; see [the connection workflow](../SKILL.md#connect) for the suggested user-facing message.
 
 ## Account/password login (fallback)
 
