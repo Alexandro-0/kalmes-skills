@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kalmes Event Hub"
+  short_description: "Publish events, register observers, and verify delivery"
+  default_prompt: "Use $kalmes-event-hub to test event publication and verify delivery to a matching observer."

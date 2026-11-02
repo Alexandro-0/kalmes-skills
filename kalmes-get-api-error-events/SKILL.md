@@ -7,7 +7,7 @@ description: Retrieve and inspect Kalmes HTTP 500–599 API error events, includ
 
 ## Connection
 
-Reuse the target environment, API base URL, and valid authenticated session already established for the task. If authentication is missing, use [kalmes-connect](../kalmes-connect/SKILL.md), preferring an API key. Keep credentials and JWTs out of output and files.
+Reuse the target environment, API base URL, and valid authenticated session already established for the task. If authentication is missing, use `$kalmes-connect`, preferring an API key. Keep credentials and JWTs out of output and files.
 
 Normalize the base URL to `https://host/<project>/api/`. Query `GET api-error-events` with `Authorization: Bearer <JWT>`; this is a built-in endpoint, **not** `extracode/api-error-events` or a generic collection route.
 
