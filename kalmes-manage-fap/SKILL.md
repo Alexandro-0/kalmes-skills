@@ -9,14 +9,14 @@ Manage collection definitions through the authenticated Kalmes HTTP API. Do not 
 
 ## Connection gate
 
-Require the Kalmes API URL, target environment, and an API key (preferred) or account/password fallback before protected reads or writes. Ask for an API key first when authentication is missing. Authenticate with `$kalmes-connect`; never persist or echo credentials or JWTs.
+Reuse the valid session for the same target and acting account; otherwise connect with `$kalmes-connect`. Never persist or echo credentials or JWTs.
 
 Read [references/fap-collections.md](references/fap-collections.md) before designing or mutating a definition.
 
 ## Workflow
 
 1. Determine the plugin code. Use a stable ASCII identifier. If the user is continuing an existing plugin, preserve its exact code.
-2. Query definitions by exact `collectionName` or plugin before designing. Never create a duplicate `collectionName`.
+2. For a lookup, query by exact `collectionName` or plugin and return the requested fields or module name. Continue with the remaining steps for definition design or mutation. Check for duplicate `collectionName` before creation.
 3. Read every referenced, embedded, parent, and child definition needed to understand the relationship graph.
 4. Retrieve `system_roles` from the definition API and create an explicit read/write matrix for each column.
 5. Preserve the current `id`, `version`, `plugin`, language pack, prompts, relationships, and unrelated columns when editing.

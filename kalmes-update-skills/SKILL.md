@@ -10,8 +10,8 @@ Use `https://github.com/Alexandro-0/kalmes-skills.git` as the canonical reposito
 ## Establish repository state
 
 1. Locate the repository root with Git rather than assuming a fixed machine path. If no clone exists and the user asked to install or work on the repository, clone the canonical URL into the user-selected destination.
-2. Read applicable repository instructions, the full affected `SKILL.md`, its directly linked references, `agents/openai.yaml`, and the relevant English and Traditional Chinese README sections before editing.
-3. Inspect `git status --short --branch`, current branch, upstream, `origin`, and local commits. Run `git fetch origin`, then calculate `origin/main...HEAD` ahead/behind counts.
+2. For edits, read applicable repository instructions, the affected `SKILL.md` and the references needed for the change. Inspect UI metadata and both catalogs when changing discovery, naming or advertised capabilities.
+3. Inspect local status, branch, upstream and origin. Fetch and compare with `origin/main` for synchronization, branching from current upstream or publication. Local inspection and offline edits can use the working tree.
 4. Preserve all existing changes. Never use hard reset, discard, force checkout, automatic stash, or force push. Stop a sync that would overlap dirty files or require a history decision.
 
 Read [references/repository-workflow.md](references/repository-workflow.md) for exact Git decisions, repository conventions, installation refresh, and publication gates.
@@ -35,6 +35,8 @@ Read [references/repository-workflow.md](references/repository-workflow.md) for 
 8. Save text as strict UTF-8. Do not mechanically rewrite unrelated files or line endings.
 
 ## Validation gate
+
+For read-only inspection, report the requested findings directly. For source changes, run the checks below. Reuse their results before publication only while the validated tree and dependencies are unchanged.
 
 Run the bundled repository validator from the repository root:
 

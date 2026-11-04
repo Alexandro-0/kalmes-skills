@@ -9,7 +9,7 @@ Default to the fast path. Do not audit the module, ENV, SMTP configuration, auth
 
 ## Fast path: send immediately
 
-1. Reuse the current authenticated Kalmes connection. If none is available, ask only for the Kalmes URL and an API key (preferred) or account/password fallback, then connect with `$kalmes-connect`.
+1. Reuse the valid session for the same target project and sender account. If missing, establish it with `$kalmes-connect` using an API key (preferred) or password fallback.
 2. Require only:
    - exact recipient address or addresses;
    - a non-empty subject;

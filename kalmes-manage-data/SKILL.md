@@ -7,21 +7,21 @@ description: Design and operate Kalmes runtime feature data using schema-driven 
 
 ## Connection and credential rule
 
-Require the Kalmes URL and an API key (preferred) or account/password fallback before inspecting or changing a live system. Ask for an API key first when authentication is missing. Never persist or echo credentials or JWTs. Only when password fallback is used, tell the user before work and at completion that the supplied password must be replaced and its sessions revoked.
+Reuse a valid session for the same target and acting account. If missing, use `$kalmes-connect`. Never persist or echo credentials or JWTs. For password fallback, require password replacement and session revocation at handoff.
 
-Authenticate with `$kalmes-connect`, then read [references/data-api.md](references/data-api.md).
+Consult the applicable endpoint section of [references/data-api.md](references/data-api.md).
 
 ## Data workflow
 
-1. Discover existing collections, schemas, identifiers, references, visibility conventions, and record volume.
+1. For a single record with a known contract, use the targeted endpoint. Discover only missing schema, identifiers or relationships. For a read, return after validating the response. For writes, preserve prior values needed for rollback.
 2. Determine whether the request targets a FAP definition or runtime records. Route definition changes to `$kalmes-manage-fap` and read-only analytical questions to `$kalmes-analyze-data`.
 3. Decide between schema-driven `base/<column>`, feature-owned `records/<column>`, or an existing Extra Code module through `$kalmes-invoke-module`.
-4. Define required fields, types, unique keys, references, ownership, visibility, timestamps, and retention.
+4. For collection design or bulk work, determine required fields, types, unique keys, references, ownership, visibility, timestamps and retention.
 5. Test a single create/read/update cycle before bulk operations.
 6. Add query limits and deterministic ordering where the API permits it.
 7. Use embedded endpoints only for declared embedded fields. Use record/history endpoints when auditability is required.
 8. Upload files separately, store returned resource URLs/IDs, and test authorized download.
-9. Verify malformed, missing, duplicate, unauthorized, and not-found cases.
+9. For a targeted write, read back the affected record. Exercise malformed, missing, duplicate, unauthorized and not-found cases when implementing or changing those behaviors.
 10. Record created IDs and previous values for rollback.
 
 ## Constraints

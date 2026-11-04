@@ -5,11 +5,11 @@ description: Build complete plugin-scoped software features inside an existing K
 
 # Build Kalmes Software
 
-Treat a feature as complete only when its data, behavior, UI, access, verification, and recovery path are all addressed.
+For an isolated API, page, query or configuration change, use its focused skill directly. For a feature spanning multiple surfaces, perform only the applicable steps below and pass the target, session, resolved identifiers and verification results between skills.
 
 ## Mandatory connection gate
 
-Before reading or changing a live Kalmes system, require the user to provide:
+For live work, reuse the current session for the same project, environment and acting account. When establishing a new connection, require:
 
 - the Kalmes base URL ending at, or convertible to, `/<project>/api/`;
 - an API key (preferred), or a Kalmes account and password fallback;
@@ -22,15 +22,15 @@ Only when password fallback is used, tell the user before starting that they mus
 ## Workflow
 
 1. Confirm the URL, API key or fallback account/password, target environment, requested behavior, roles, and acceptance criteria. Establish a stable ASCII plugin code; preserve the user's existing plugin code when continuing prior work.
-2. Connect with `$kalmes-connect`; call `ping`, prefer `login/api-key`, and retain the JWT without exposing it.
-3. Inventory existing config, embedded pages, FAP definitions by plugin, runtime data, code names, module names, roles, and menu keys. Reuse names and structures where possible.
+2. Use `$kalmes-connect` when a new authenticated session is needed.
+3. Map the acceptance criteria to affected surfaces first. Inventory only those resources and their dependencies. Reuse verified identifiers and definitions within the task. Refresh mutable state before a write if it may have changed.
 4. Design the feature using [references/workflow.md](references/workflow.md). Identify reversible and destructive changes.
 5. Design or update FAP definitions and their parent/reference graph with `$kalmes-manage-fap`; use `$kalmes-manage-data` for runtime records and files.
 6. Implement APIs, HTML, initialization jobs, schedules, and shared modules with `$kalmes-develop-code`. Exercise existing runtime modules through `$kalmes-invoke-module`.
 7. If the feature sends email, operate it with `$kalmes-send-email`; use its fast path for an explicit send request and enter setup or diagnosis only when needed.
 8. Configure requested system name/logo branding, register pages and menu structure, and update both language packs with `$kalmes-configure-ui`.
 9. Configure accounts, roles, category denial, action denial, and page roles with `$kalmes-manage-access`.
-10. Test success, validation, unauthorized, forbidden, retry, and rollback paths with `$kalmes-test-release`.
+10. Use `$kalmes-test-release` for release verification. Carry forward results for the same revision, environment and acting role. Run missing checks for the affected behavior and dependencies.
 11. When a portable release is requested, export, inspect, transfer, import, and verify its plugin tar with `$kalmes-transfer-plugin`; never upload a pack merely to inspect it.
 12. If the user explicitly wants the internal Kalmes Agent queue to continue work, create and run it with `$kalmes-manage-subtasks`; do not substitute that queue for ordinary Codex implementation.
 13. Summarize plugin code, definitions, changed resources, endpoint/module names, roles, tests, rollback instructions, and unresolved risks. Require password replacement and session revocation only when password fallback was used.

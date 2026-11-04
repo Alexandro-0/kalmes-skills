@@ -9,9 +9,9 @@ Translate the web Agent's internal module tool into a normal authenticated HTTP 
 
 ## Preconditions
 
-Require the Kalmes URL, target environment, exact module name, HTTP method, intended operation, and an API key (preferred) or account/password fallback. Ask for an API key first when authentication is missing, then authenticate with `$kalmes-connect`.
+Resolve the target, exact module, method and intended operation. Reuse the current authenticated session for that target and account; otherwise connect with `$kalmes-connect`.
 
-For module and collection discovery, read the definition with `$kalmes-manage-fap`. For request construction, read [references/module-http.md](references/module-http.md).
+When the module name and contract are known, send the scoped request directly. Use `$kalmes-manage-fap` only for unresolved collection mappings. Consult [references/module-http.md](references/module-http.md) for unfamiliar request or response details.
 
 ## Workflow
 

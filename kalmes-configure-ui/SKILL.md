@@ -11,9 +11,9 @@ For a request that only asks for the displayed Kalmes system name or logo, call 
 
 ## Connection rule
 
-Require the Kalmes URL and an API key (preferred) or account/password fallback before protected reads or writes. Ask for an API key first when authentication is missing. Never persist or echo credentials/JWTs. Only when password fallback is used, warn before starting and at completion that the supplied password must be replaced and its sessions revoked.
+For protected calls, reuse the valid session for the same target and account. If missing, connect with `$kalmes-connect`. Never persist or echo credentials/JWTs. For password fallback, require password replacement and session revocation at handoff.
 
-Authenticate with `$kalmes-connect`, then read [references/ui-api.md](references/ui-api.md).
+Consult the relevant section of [references/ui-api.md](references/ui-api.md) for the affected config, menu, embedded page or language pack.
 
 ## Mandatory HTML embedded-page key
 
@@ -34,7 +34,7 @@ Rules:
 
 ## Workflow
 
-1. Read the public sign-in identity when relevant, then read current protected config and embedded-page settings; save original values for rollback.
+1. Select the steps for the requested surface. Read and save the current values needed for its update and rollback. A branding-only change needs the current `mes` object; page registration also needs the relevant menu, role and language state.
 2. For branding changes, save the current `mes.manufacture_name` and `mes.logo`; upload the replacement logo, merge its returned URL and the new name into the complete current `mes` object, then patch config.
 3. Choose unique stable keys for route, page, menu category, and translation labels.
 4. Ensure the target HTML Extra Code route works before registering the page.
@@ -42,7 +42,7 @@ Rules:
 6. Update `extra_menu.ordering` and `extra_menu.extension` without dropping unrelated categories.
 7. Add every new label to both `language_pack1` and `language_pack2`. Do not silently copy one language unless the user requests it.
 8. Apply category/action access through `$kalmes-manage-access`.
-9. Reload and verify branding, desktop/mobile navigation, direct URL navigation, both languages, allowed role, denied role, missing-page behavior, and the HTML shared-key mapping.
+9. Reload and verify the affected surface. For a brand change, check the displayed identity. For navigation or embedded-page changes, test desktop/mobile and direct routes, both languages, allowed/denied access, missing-page behavior and the HTML key mapping as applicable.
 
 ## Mutation rules
 

@@ -7,7 +7,7 @@ description: Connect and authenticate to a Kalmes HTTP API with a preferred API 
 
 ## Required inputs
 
-Require the Kalmes URL, target environment, and one authentication method: an API key (preferred) or an account and password fallback. If authentication is absent, ask the user to create and provide an API key from **Advanced Settings → API Keys** or **API Access → API Keys**, depending on the manager role. Do not request account/password when a usable API key is available.
+For a protected call, reuse a valid in-memory session only for the same base URL, environment and acting account within this task. Proceed directly to the requested call. For a new session, require the URL, environment and an API key (preferred) or account/password fallback. If credentials are missing, ask for an API key from **Advanced Settings → API Keys** or **API Access → API Keys**, depending on the manager role.
 
 Recommend a least-privilege API key bound to the required SuperUser, Admin, or IT account. Never save or echo the API key, password, login payload, JWT, session ID, or sensitive response claims. Keep secrets in memory or a protected secret input/environment variable; avoid URL query credentials and command-line secret arguments. If password fallback is used, state before login that the supplied password must be replaced after work is complete.
 
@@ -22,4 +22,4 @@ Recommend a least-privilege API key bound to the required SuperUser, Admin, or I
 
 ## Finish
 
-Discard JWTs and temporary credential variables. If an API key was temporary, exposed, or is no longer needed, tell the user to revoke it in **Advanced Settings → API Keys** or **API Access → API Keys**, depending on the manager role. Only when password fallback was used, tell the user: **Immediately change the password supplied for this operation and revoke or end its active sessions.** If the user asks Codex to rotate a secret, require a secure input surface and never repeat it in the response.
+Discard JWTs and temporary credential variables when the overall task ends. If a key was temporary, exposed or is no longer needed, recommend revoking it. For password fallback, remind the user to immediately replace the password and revoke its sessions.

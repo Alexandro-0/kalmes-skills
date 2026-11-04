@@ -8,7 +8,7 @@ Operate through authenticated HTTP endpoints and repository files available to C
 
 ## Mandatory safety gate
 
-Require the Kalmes URL, target environment, and an API key (preferred) or account/password fallback before protected source reads or changes. Ask for an API key first when authentication is missing, then authenticate with `$kalmes-connect`. Never persist or echo credentials, tokens, environment secrets, or source containing secrets.
+For local source work, use the repository and local checks. For protected source reads or changes, reuse the authenticated session for the same target and account. If missing, use `$kalmes-connect` with the URL, environment and an API key (preferred) or password fallback. Never persist or echo credentials, tokens, environment secrets or source containing secrets.
 
 Creating, uploading, or running Extra Code is remote code execution. Inspect current source and versions first. On production, show the intended filenames, types, routes, side effects, dependencies, job IDs, tests, and rollback before the first write or run.
 
@@ -19,7 +19,7 @@ Creating, uploading, or running Extra Code is remote code execution. Inspect cur
 - `Initial`: explicit/startup initialization and scheduler registration.
 - `Others`: importable shared Python module with no route by default.
 
-Read [references/code-api.md](references/code-api.md) for source lifecycle and runtime endpoints.
+Consult [references/code-api.md](references/code-api.md) for the relevant source lifecycle or runtime contract when using those endpoints.
 
 ## Required Python API import path
 
@@ -63,16 +63,16 @@ When the user asks only to read Kalmes source:
 
 ## Development workflow
 
-1. Inventory code metadata and ensure the filename and plugin code are intentional. Read current source and version list when editing.
-2. If the feature uses FAP definitions, inspect them with `$kalmes-manage-fap` before designing code.
-3. For an API or collection data module, read [references/fap-api.md](references/fap-api.md).
+1. For a local fix to an existing file, inspect its source and affected dependencies, apply the relevant type-specific requirements above, then verify syntax and the changed behavior locally. For an API import-path fix, check the module-level setup, import order and affected import. Finish after these checks unless live work was requested. For a live edit, retain the current source/version for rollback. Query metadata only if the filename, plugin or target is unresolved.
+2. If the change depends on FAP fields or relationships, inspect only the definitions needed with `$kalmes-manage-fap`.
+3. For FAP-backed APIs and collection modules, read [references/fap-api.md](references/fap-api.md). Use the API contract in code-api.md for ordinary Python APIs.
 4. For a single-file FAP HTML page, read [references/fap-html.md](references/fap-html.md).
 5. For a scheduled task, read [references/scheduler.md](references/scheduler.md).
-6. Create from a supported template or upload a file. Keep API, Html, and Initial filenames ending in `.py` in source metadata while route names omit `.py`. For `Html`, always apply the mandatory shared-secret rule above.
-7. Implement the documented `invoke` contract, validation, and explicit authorization. Never rely on menu visibility or an internal tool's injected identity.
+6. For a new item, create from a supported template or upload a file. For edits, update the existing source. Keep API, Html and Initial filenames ending in `.py` in source metadata while route names omit `.py`. For `Html`, apply the mandatory shared-secret rule above.
+7. Preserve the documented `invoke` contract, validation and explicit authorization when editing. Implement and test them for new or changed operations. Never rely on menu visibility or an internal tool's injected identity.
 8. Keep credentials and environment secrets in the protected Kalmes environment facility, not source. The fixed HTML routing key defined above is supplied through the HTML metadata/write contract and must not be copied into static HTML.
-9. Save source, read it back, test in non-production, then invoke the runtime route. Do not run Initial merely to syntax-check it.
-10. Test success, malformed input, unauthorized, forbidden, dependency failure, retry, and repeat execution.
+9. For local edits, check syntax and exercise the changed behavior locally. For an authorized live edit, save, read back the source, and verify the affected runtime behavior in non-production. Never run Initial merely to syntax-check it.
+10. Select tests by what changed. For an import-path fix, verify the module-level setup and import order and exercise the affected import. For input changes test malformed input, for access changes test allowed and denied roles, and for side effects or dependencies test failure and safe repeat. Use the applicable release matrix for deployments.
 11. Preserve the prior version and document rollback. Register user-facing HTML with `$kalmes-configure-ui`.
 
 ## FAP feature sequence

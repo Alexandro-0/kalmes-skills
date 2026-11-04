@@ -10,7 +10,7 @@
 
 ## 1. Requirement model
 
-Capture:
+Capture the following details for the affected surfaces only:
 
 - actors and allowed/denied roles;
 - plugin code, FAP collection definitions, business records, required fields, uniqueness, references, sheets, and lifecycle;
@@ -62,7 +62,7 @@ Changing `schema/*.json` is a repository/deployment change, not a general remote
 
 ## 4. Acceptance matrix
 
-Test at minimum:
+Select the applicable rows for the feature and its dependencies. Reuse results from the same revision and target.
 
 | Area | Positive | Negative |
 |---|---|---|

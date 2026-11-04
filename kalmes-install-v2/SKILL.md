@@ -25,7 +25,7 @@ Skip installation only when both Docker Engine and the Compose plugin already wo
 
 Do not remove an existing Docker installation, containers, images, volumes, networks, WSL distributions, or conflicting packages without explicit authorization. If a reboot or logout is required, record the completed state and give the exact resume step.
 
-Before continuing, verify that the daemon is reachable, Compose is available as `docker compose`, and Docker is using Linux containers. Do not substitute the legacy `docker-compose` command.
+Reuse the successful engine, Compose and Linux-container checks from this installation step. Repeat them if Docker or the host changed, including after a reboot. Require the Compose plugin (`docker compose`).
 
 ## Run the V2 installer
 

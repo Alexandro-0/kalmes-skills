@@ -9,14 +9,14 @@ Keep this workflow read-only. If fulfilling the request requires creating, updat
 
 ## Connection and scope
 
-Require the Kalmes API URL, target environment, requested business scope, intended output, and an API key (preferred) or account/password fallback. Ask for an API key first when authentication is missing, then authenticate with `$kalmes-connect`. Apply least privilege and do not expose records beyond the user's requested administrative scope.
+Confirm the business scope and intended output. Reuse the current target and acting account's valid session; use `$kalmes-connect` only when a session is needed. Limit records to the requested administrative scope.
 
-Read [references/analysis-workflow.md](references/analysis-workflow.md) before querying.
+Consult [references/analysis-workflow.md](references/analysis-workflow.md) for unfamiliar joins, filtering or history semantics.
 
 ## Workflow
 
 1. Translate the question into collections, fields, relationships, filters, date range, aggregation, and output format.
-2. Use `$kalmes-manage-fap` to read the relevant definitions and obtain each collection's data and history module names.
+2. Reuse a verified collection definition and module name from this task. Look up only missing definitions or relationships with `$kalmes-manage-fap`.
 3. Build a bounded query plan. Prefer selective server filters, explicit limits, and 13-digit millisecond timestamps for supported `start` and `end` intervals.
 4. Use `$kalmes-invoke-module` with `GET` only. Query data modules for current records and history modules for operation records.
 5. Resolve `reference`, `embedded`, and sheet relationships from definitions. Join only the keys needed for the answer.

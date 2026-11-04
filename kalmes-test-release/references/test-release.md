@@ -4,7 +4,7 @@
 
 For every changed API, record method/path, acting role, request category, expected HTTP status/body, observed result, and cleanup.
 
-Required categories:
+Select the required categories for the affected surfaces and their dependencies. For a production release, include the applicable release gates and a post-release smoke test.
 
 - readiness and valid/invalid login;
 - happy-path create/read/update and safe repeat;

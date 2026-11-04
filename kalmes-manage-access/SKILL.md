@@ -7,7 +7,7 @@ description: Manage Kalmes users, built-in and custom roles, account role assign
 
 ## Mandatory credentials and safety
 
-Require the Kalmes URL and an API key (preferred) or account/password fallback before live operations. Ask for an API key first when authentication is missing. Use a least-privilege eligible administrator binding where possible. Never persist or echo credentials, new passwords, JWTs, session IDs, or sensitive claims. Only when password fallback is used, tell the user before starting and at handoff to replace the supplied password and revoke its sessions.
+Reuse the valid session for the same target and acting account. If missing, connect with `$kalmes-connect` using a least-privilege eligible administrator binding. Never persist or echo credentials, passwords, JWTs, session IDs or sensitive claims. For password fallback, require password replacement and session revocation at handoff.
 
 Account creation, role elevation, password reset, account deletion, and global logout are sensitive. Require explicit intent, identify the target account, show the intended role change, and verify the acting account is authorized. Never rely on the fact that a legacy route is publicly callable.
 
@@ -15,9 +15,9 @@ Read [references/access-api.md](references/access-api.md).
 
 ## Access workflow
 
-1. Authenticate with `$kalmes-connect` and record the acting role without exposing tokens.
-2. Read current config, role list, target account, menu denial maps, action denial list, and embedded-page roles.
-3. Build an access matrix of role by category by path/API operation.
+1. Verify the acting role for the requested operation without exposing tokens.
+2. For a lookup, read the requested account or role and return the result. For a change, inspect the target and the rules that determine its effective access. Inventory all denial maps and page roles for a full permissions review.
+3. Apply only the steps for the requested change. Build a role-by-operation matrix when designing or reviewing permissions.
 4. Reuse a role where its business meaning fits; otherwise add a stable key to `extra_roles` and labels to both language packs.
 5. Assign the account role with a targeted PATCH.
 6. Configure category denial, action/path denial, and embedded-page roles. Preserve unrelated rules.

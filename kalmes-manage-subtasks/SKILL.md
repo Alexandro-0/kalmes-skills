@@ -9,13 +9,13 @@ Operate the Kalmes internal queue over HTTP. These are persistent server-side Ag
 
 ## Connection gate
 
-Require the Kalmes URL, target environment, explicit queue intent, and an API key (preferred) or account/password fallback. Ask for an API key first when authentication is missing. Authenticate with `$kalmes-connect`, then read [references/subtask-api.md](references/subtask-api.md).
+Require explicit queue intent. Reuse the valid session for the same target and acting account; otherwise connect with `$kalmes-connect`. Read the relevant operation in [references/subtask-api.md](references/subtask-api.md). For a status lookup, read the named task group once. Poll only when monitoring was requested.
 
 ## Create an ordered task
 
 1. Use the user-provided Main Task ID or generate eight uppercase ASCII letters. Reuse the same ID for every subtask in the sequence.
 2. Split the request into ordered, independently checkable prompts. A subtask must fail when later steps must not continue after its failure.
-3. Query the server-side Agent Skills list and validate each comma-separated `skillKeys` value. These are internal Kalmes skill keys, not `$kalmes-*` Codex skill names.
+3. Query the server-side Agent Skills list once per task group and validate every requested `skillKeys` value against it. These are internal Kalmes keys.
 4. POST each subtask in order with `subTaskStatus: "Ready"` and empty `code`, `result`, receiver ID, and receiver name. The API assigns the visible subtask code.
 5. Read the task group back and verify order, generated codes, status, prompt, and skill keys.
 6. Return the Main Task number to the user.

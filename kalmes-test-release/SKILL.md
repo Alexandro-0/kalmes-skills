@@ -7,7 +7,7 @@ description: Verify, package, release, monitor, and roll back Kalmes custom feat
 
 ## Connection gate
 
-Require the Kalmes URL, target environment, and an API key (preferred) or account/password fallback before live tests or release operations. Ask for an API key first when authentication is missing. Never persist or echo credentials, JWTs, source secrets, plugin secrets, or config encryption material. Only when password fallback is used, tell the user before work and at handoff to replace the password and revoke its sessions.
+Reuse the same target environment and acting account's valid session for live tests. If missing, use `$kalmes-connect` with the Kalmes URL, environment and an API key (preferred) or password fallback. Never persist or echo credentials, JWTs, source secrets, plugin secrets or config encryption material. For password fallback, require password replacement and session revocation at handoff.
 
 Production releases, plugin activation, config import, code execution, data cleanup, and rollback are high impact. Require an approved change set, backup, maintenance expectations, and explicit confirmation immediately before the high-impact mutation.
 
@@ -15,12 +15,12 @@ Read [references/test-release.md](references/test-release.md).
 
 ## Verification workflow
 
-1. Authenticate with `$kalmes-connect`; verify `ping` readiness and license prerequisites.
+1. Select checks for the changed surfaces and their dependencies. Reuse observed results only for the same revision, environment, role and relevant state. Verify readiness and license prerequisites for release; reconnect only if needed.
 2. Inventory and back up affected FAP definitions and backing data, config, embedded pages, code source/versions, records, resource IDs, roles, menu keys, and job IDs.
 3. Test code syntax/contract in non-production, then run API and HTML contract tests.
 4. Test data validation, idempotency, pagination, files, external dependency failure, and safe retry.
 5. Test allowed and denied accounts by direct endpoint and page navigation.
-6. Test scheduler registration twice, execution behavior, misfire/retry assumptions, and duplicate prevention. When available, verify through `GET extracode/kalmesSchedulerApi`; do not claim cancel/restart coverage unless its PATCH behavior is deployed and tested.
+6. For scheduler changes, test registration twice, execution behavior, misfire/retry assumptions and duplicate prevention. When available, verify through `GET extracode/kalmesSchedulerApi`; claim cancel/restart coverage only if deployed and tested.
 7. Release the smallest reversible unit. Re-read state after each write.
 8. Perform smoke tests and capture non-secret evidence.
 9. Exercise or dry-run rollback, then document exact restoration order.

@@ -9,7 +9,7 @@ Use the authenticated Kalmes plugin-pack APIs for portable Extra Code releases. 
 
 ## Connection and safety gate
 
-Require the Kalmes API URL, target environment, and an API key (preferred) or account/password fallback. Authenticate with `$kalmes-connect`; never persist or echo credentials or JWTs.
+For inspection of a supplied plain tar, run the local preflight and report its findings. For live export or import, reuse the valid session for the same target and acting account; otherwise connect with `$kalmes-connect`. Never persist or echo credentials or JWTs.
 
 For export, also require the intended plugin name, immutable version, exact code/FAP/ENV scope, and a secure local output path. For import, require the tar path, whether it is plain or device-bound encrypted, and the expected plugin/version.
 
@@ -38,7 +38,7 @@ For an encrypted pack, do not claim that plain-tar inspection passed. Verify its
 
 ## Export workflow
 
-1. Authenticate, call `ping`, identify the source environment, and inventory active Extra Code metadata, source folders, FAP definition IDs, and ENV names.
+1. Confirm source environment and resolve metadata, source folders, FAP definition IDs and ENV names for the requested resources. Reuse readiness from the current connection.
 2. Use a stable ASCII `name` and immutable `version` containing only letters, digits, dots, underscores, or hyphens. Reject separators, traversal text, or a reused release version.
 3. Select a non-empty `resources` list with each current metadata `id`, exact filename, and source `plugin` folder. Select FAP definitions by ID. Package ENV names with non-secret examples only; the exporter does not copy current ENV values.
 4. Prefer `flat=false` so files install under a versioned plugin folder. Use `flat=true` only for a verified legacy requirement because it writes directly into the shared `extraCode` directory. Set `expose` deliberately.
@@ -49,7 +49,7 @@ For an encrypted pack, do not claim that plain-tar inspection passed. Verify its
 ## Import workflow
 
 1. Preflight the plain tar locally. Record its SHA-256, plugin name/version, `flat`, `expose`, code files/types, ENV names, FAP collections, UI/language keys, and all `Initial` files. For encrypted tar, record equivalent trusted release metadata without attempting ordinary tar inspection.
-2. Authenticate and inventory the target. Back up matching code metadata/source/versions, ENV records, embedded pages, affected config language/menu/access fields, FAP definitions, scheduler/job state, and any data needed to reverse `Initial` effects.
+2. Verify the authenticated target and inventory collisions. Back up matching code metadata/source/versions, ENV records, embedded pages, affected config language/menu/access fields, FAP definitions, scheduler/job state and any data needed to reverse `Initial` effects.
 3. Produce a collision and change plan. Remember that importing updates or inserts declared objects but does not remove obsolete objects from an older release.
 4. Run non-production compatibility tests. Immediately before upload, identify the target environment, checksum, plugin/version, collisions, automatic `Initial` execution, backup, and rollback plan; obtain explicit confirmation.
 5. Upload exactly one lowercase `.tar` file in multipart field `file` to the correct plain or encrypted endpoint. Do not blindly retry a timeout or ambiguous result because the first request may have written data and executed `Initial` code.
