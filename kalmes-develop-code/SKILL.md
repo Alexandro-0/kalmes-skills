@@ -21,6 +21,17 @@ Creating, uploading, or running Extra Code is remote code execution. Inspect cur
 
 Read [references/code-api.md](references/code-api.md) for source lifecycle and runtime endpoints.
 
+## Required Python API import path
+
+Every Python Extra Code item of type `API` must include this setup at module scope, before importing any Kalmes Extra Code modules, even if the API currently uses none.
+
+```python
+import sys
+sys.path.append('./extraCode')
+```
+
+Before saving a new or edited API, verify that the setup is present and uncommented. Add it if missing and reuse existing setup to avoid duplicates.
+
 ## Mandatory HTML shared secret
 
 Every create or update operation for an Extra Code item whose type is `Html` MUST use the fixed 16-character HTML shared secret:

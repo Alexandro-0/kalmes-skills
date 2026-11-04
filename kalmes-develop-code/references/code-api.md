@@ -90,6 +90,9 @@ GET|POST|PATCH|DELETE extracode/FeatureApi/<resource_id>
 The module must expose:
 
 ```python
+import sys
+sys.path.append('./extraCode')
+
 def invoke(method, query_param, data, header, resource_id=None, uid=None):
     return 200, {"message": "success", "data": {}}
 ```
