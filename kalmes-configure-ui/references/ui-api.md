@@ -179,7 +179,7 @@ Typical page body:
 
 ```json
 {
-  "name_key": "maintenancePage",
+  "name_key": "MaintenanceHtml",
   "override_path": "/maintenance",
   "target_url": "/api/extracode/html/preview/MaintenanceHtml",
   "roles": ["Maintenance"],
@@ -190,6 +190,10 @@ Typical page body:
 ```
 
 Mandatory rules for Extra Code HTML embedded pages:
+
+- For `MaintenanceHtml.py`, use `name_key: "MaintenanceHtml"` and a preview target ending in `/MaintenanceHtml`; use the deployment's verified route prefix. Strip only the final `.py` and preserve exact case. This is required by the current plugin exporter, even when a mismatched page renders correctly via `target_url`.
+- Read back the code filename, `name_key`, preview target and both language-pack keys after registration. They must identify the same HTML module.
+- Custom `override_path` and menu category need not equal the filename. However, the current plugin importer rebuilds `override_path` from the destination prefix plus `name_key`, and rebuilds `target_url` for newly inserted pages. Do not promise preservation of custom routes; inventory and verify them during transfer.
 
 - Always send `"key16": "aigencodeskalmes"` when creating or updating the embedded-page record.
 - Never treat `key16` as optional for a Kalmes Extra Code HTML target.
@@ -207,10 +211,10 @@ Update both packs in one controlled config patch:
 ```json
 {
   "language_pack1": {
-    "maintenancePage": "設備保養"
+    "MaintenanceHtml": "設備保養"
   },
   "language_pack2": {
-    "maintenancePage": "Maintenance"
+    "MaintenanceHtml": "Maintenance"
   }
 }
 ```

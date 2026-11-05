@@ -8,6 +8,7 @@ import re
 import sys
 import tarfile
 from pathlib import Path, PurePosixPath
+from urllib.parse import unquote, urlsplit
 
 
 DEFAULT_MAX_MEMBERS = 10000
@@ -53,7 +54,72 @@ def plugin_root_candidates(member_map):
     return candidates
 
 
-def inspect_archive(path, max_members, max_bytes):
+def inspect_embedded_pages(meta, descriptors, expected_pages, report):
+    html_names = {
+        item['name'][:-3]
+        for item in descriptors
+        if isinstance(item, dict) and item.get('type') == 'Html'
+        and isinstance(item.get('name'), str) and item['name'].endswith('.py')
+    }
+    pages = meta.get('override', [])
+    if not isinstance(pages, list):
+        report['errors'].append('override must be an array when present')
+        pages = []
+    page_names = set()
+    registered_html = set()
+    for index, page in enumerate(pages):
+        label = f'override[{index}]'
+        if not isinstance(page, dict):
+            report['errors'].append(f'{label} must be an object')
+            continue
+        name = page.get('name_key')
+        if not isinstance(name, str) or not name.strip():
+            report['errors'].append(f'{label}.name_key must be a non-empty string')
+            continue
+        if name in page_names:
+            report['errors'].append(f'duplicate embedded page name_key: {name}')
+        page_names.add(name)
+        target = page.get('target_url')
+        module = None
+        if isinstance(target, str):
+            try:
+                path = unquote(urlsplit(target).path)
+                match = re.search(r'/extracode/html/preview/([^/]+)/?$', path)
+                if match:
+                    module = match.group(1)
+            except ValueError:
+                report['errors'].append(f'{label}.target_url is malformed')
+        if module is not None:
+            if module not in html_names:
+                report['errors'].append(
+                    f'{label} preview target {module!r} has no matching declared Html file'
+                )
+            if name != module:
+                report['errors'].append(
+                    f'{label} name_key {name!r} must exactly match preview module {module!r}'
+                )
+            if name == module and module in html_names:
+                registered_html.add(module)
+        elif name in html_names:
+            report['errors'].append(
+                f'{label} for Html file {name}.py must have a matching Extra Code preview target'
+            )
+    for name in sorted(set(expected_pages)):
+        if name not in page_names:
+            report['errors'].append(f'missing expected embedded page in override: {name}')
+        elif name not in registered_html:
+            report['errors'].append(f'expected HTML page has no valid packaged target: {name}')
+    missing = sorted(html_names - registered_html)
+    if missing:
+        report['warnings'].append(
+            'Html files without compatible embedded-page settings: ' + ', '.join(missing)
+            + '; verify source registrations and requested scope (unregistered HTML may be intentional)'
+        )
+    report['embedded_pages'] = sorted(page_names)
+    report['expected_pages'] = sorted(set(expected_pages))
+
+
+def inspect_archive(path, max_members, max_bytes, expected_pages=()):
     report = {
         "path": str(path.resolve()),
         "archive_size": path.stat().st_size,
@@ -176,6 +242,8 @@ def inspect_archive(path, max_members, max_bytes):
             if code_type == "Initial":
                 initial_files.append(filename)
 
+        inspect_embedded_pages(meta, descriptors, expected_pages, report)
+
         files_prefix = files_dir + "/"
         packaged_files = sorted(
             name[len(files_prefix) :]
@@ -252,7 +320,8 @@ def print_human(report):
     ):
         if key in report:
             print(f"{key}: {report[key]}")
-    for key in ("declared_files", "initial_files", "env_names", "fap_collections"):
+    for key in ("declared_files", "initial_files", "env_names", "fap_collections",
+                "embedded_pages", "expected_pages"):
         if key in report:
             values = report[key]
             print(f"{key}: {', '.join(values) if values else '-'}")
@@ -268,6 +337,10 @@ def main():
     )
     parser.add_argument("archive", type=Path)
     parser.add_argument("--json", action="store_true", help="emit JSON")
+    parser.add_argument(
+        "--expect-page", action="append", default=[], metavar="HTML_FILENAME_STEM",
+        help="require this embedded HTML page in override; repeat for each expected page",
+    )
     parser.add_argument("--max-members", type=int, default=DEFAULT_MAX_MEMBERS)
     parser.add_argument("--max-bytes", type=int, default=DEFAULT_MAX_BYTES)
     args = parser.parse_args()
@@ -277,7 +350,7 @@ def main():
     if not args.archive.is_file():
         parser.error(f"archive does not exist: {args.archive}")
 
-    report = inspect_archive(args.archive, args.max_members, args.max_bytes)
+    report = inspect_archive(args.archive, args.max_members, args.max_bytes, args.expect_page)
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
     else:

@@ -34,6 +34,8 @@ python scripts/inspect_plugin_tar.py <plugin.tar>
 
 The inspector reads without extracting. Stop on an invalid archive, unsafe member, ambiguous plugin root, invalid UTF-8/JSON metadata, missing declared file, duplicate path, size-limit violation, or missing required metadata. Review warnings, especially `flat=true`, unknown code types, unlisted files, and packaged `Initial` modules.
 
+For every expected embedded HTML page, add `--expect-page ExactFilenameStem` (repeatable). Derive the expected set from source page registrations and the requested scope, never from the tar's potentially incomplete `override`. Missing expected pages or incompatible Extra Code page names fail inspection. HTML files without page registrations can be intentional; without an expected set the inspector warns, but cannot establish export completeness.
+
 For an encrypted pack, do not claim that plain-tar inspection passed. Verify its trusted origin, checksum, expected plugin/version, and target installation binding through an approved channel.
 
 ## Export workflow
@@ -41,9 +43,10 @@ For an encrypted pack, do not claim that plain-tar inspection passed. Verify its
 1. Confirm source environment and resolve metadata, source folders, FAP definition IDs and ENV names for the requested resources. Reuse readiness from the current connection.
 2. Use a stable ASCII `name` and immutable `version` containing only letters, digits, dots, underscores, or hyphens. Reject separators, traversal text, or a reused release version.
 3. Select a non-empty `resources` list with each current metadata `id`, exact filename, and source `plugin` folder. Select FAP definitions by ID. Package ENV names with non-secret examples only; the exporter does not copy current ENV values.
+   Read source pages via `GET event/overrdiePage` and associate them with selected HTML modules using their preview `target_url`. Require each associated `name_key` to equal its exact filename without the final `.py`. If mismatched, report it and repair only when in scope; do not silently export without that page. Record expected page keys independently of the exported metadata. The exporter reads config through its compatibility hook; do not assume `embeddedPageSettings` will automatically be included.
 4. Prefer `flat=false` so files install under a versioned plugin folder. Use `flat=true` only for a verified legacy requirement because it writes directly into the shared `extraCode` directory. Set `expose` deliberately.
 5. Submit the manifest to `POST event/plugin/pack`. Require a successful binary response; preserve the server filename when available and calculate a SHA-256 checksum.
-6. Run `inspect_plugin_tar.py`. Confirm `meta.json` matches the requested name/version/scope and that every selected code file is both declared and present.
+6. Run `inspect_plugin_tar.py` with `--expect-page` for every expected page. Confirm `meta.json` matches the requested name/version/scope, every selected code file is declared and present, and `override` includes the expected pages with their roles, menu categories and labels in both language packs. Treat missing expected settings as an incomplete export even if the download succeeded. An empty `override` is valid for API-only or deliberately unregistered HTML packs, not for a requested transfer of registered pages.
 7. Store the tar and checksum in the approved release location. Do not treat the pack as a backup of business data, arbitrary resources, ENV secrets, or complete system config.
 
 ## Import workflow

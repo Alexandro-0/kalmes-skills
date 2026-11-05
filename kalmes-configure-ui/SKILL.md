@@ -34,6 +34,10 @@ Rules:
 
 ## Workflow
 
+For an embedded Extra Code HTML page, derive `name_key` from the exact code filename by removing only the final `.py`; preserve case. For example, `RinkFlowHomePage.py` requires `name_key: "RinkFlowHomePage"` and a preview target ending in `/RinkFlowHomePage`. The current plugin exporter matches this name exactly and silently omits mismatches. A working preview alone does not prove export compatibility. Keep both language-pack label keys equal to `name_key`. Custom display text, menu category, and application route may differ.
+
+For existing mismatches, report the affected record and references before changing identity. When repair is in scope, update the existing record by ID, migrate its labels/references, and verify navigation; do not create a duplicate page or blindly rename code. See the embedded-page section of `references/ui-api.md` for export/import limitations.
+
 1. Select the steps for the requested surface. Read and save the current values needed for its update and rollback. A branding-only change needs the current `mes` object; page registration also needs the relevant menu, role and language state.
 2. For branding changes, save the current `mes.manufacture_name` and `mes.logo`; upload the replacement logo, merge its returned URL and the new name into the complete current `mes` object, then patch config.
 3. Choose unique stable keys for route, page, menu category, and translation labels.

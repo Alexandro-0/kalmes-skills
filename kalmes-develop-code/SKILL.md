@@ -75,6 +75,8 @@ When the user asks only to read Kalmes source:
 10. Select tests by what changed. For an import-path fix, verify the module-level setup and import order and exercise the affected import. For input changes test malformed input, for access changes test allowed and denied roles, and for side effects or dependencies test failure and safe repeat. Use the applicable release matrix for deployments.
 11. Preserve the prior version and document rollback. Register user-facing HTML with `$kalmes-configure-ui`.
 
+When registering HTML, pass the exact filename stem as the embedded page's `name_key` and preview module name, preserving case: `FeatureHtml.py` -> `FeatureHtml`. Use that same key in both language packs. The current plugin exporter compares `name_key` to the code filename without `.py`; independently choosing a camelCase page key can silently omit its settings from exports. Verify this mapping after registration, not just that the page loads.
+
 ## FAP feature sequence
 
 For a new plugin-scoped FAP feature:

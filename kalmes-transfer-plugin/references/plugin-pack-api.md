@@ -117,6 +117,16 @@ Typical metadata:
 
 The importer recognizes code types such as `API`, `Html`, `Others`, and `Initial`. Verify current target support. After importing HTML, verify that Extra Code metadata and embedded-page registration still use the required `aigencodeskalmes` `key16` contract.
 
+### Embedded-page export compatibility
+
+The current exporter selects pages by exact equality of `name_key` and the HTML filename without `.py`. For `InventoryHtml.py`, use `InventoryHtml` for `name_key`, the preview module name, and both language-pack label keys. Do not lowercase or independently name the page key. A different `name_key` can work at runtime via `target_url` but be silently excluded from the pack.
+
+Inventory source registrations using `GET event/overrdiePage`; match selected HTML modules via their preview targets and record the expected keys before export. The exporter obtains `config.mes.override_page` through a compatibility hook, so missing settings may also indicate that the deployed hook is absent or overridden. Check the produced metadata rather than assuming a successful download includes UI configuration.
+
+Run `python scripts/inspect_plugin_tar.py plugin.tar --expect-page InventoryHtml` for a pack expected to include that registered page; repeat the option for additional pages. The script validates declared Extra Code targets and name consistency, and fails when an expected page is missing. Without the expected set it warns for HTML modules lacking registrations; unregistered HTML helpers and API-only packs are permitted. `VALID` alone does not certify source-to-pack completeness.
+
+The current importer rebuilds `override_path` from the destination prefix and `name_key`; when inserting a new page, it also rebuilds `target_url` from `name_key`. Preserve a record of custom source routes and verify destination navigation and links. A package's custom paths are not guaranteed to survive import.
+
 ## 5. Import effects
 
 The plain and encrypted routes converge on the same importer after decryption. The importer can:
