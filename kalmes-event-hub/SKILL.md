@@ -13,3 +13,7 @@ Reuse the target project and authenticated session. If a connection is needed, f
 - **Investigate a missing delivery.** Start with the snapshot. Match the receipt ID to the event record and inspect each delivery's subscription ID, status, attempts and error. A 202 receipt establishes acceptance. Report Handler success only from its delivery record. Zero matches means there were no enabled matching subscriptions at acceptance. The snapshot covers the most recent 50 events.
 
 The 資料流 tab explains the stages and the API 說明 tab shows examples for the target environment. For an HTTP 5xx investigation requiring backend error records, use `$kalmes-get-api-error-events`.
+
+## Activity attribution
+
+Activity integration requires **Kalmes 2.1.0 or later**. For Kalmes HTTP calls, including reused sessions, follow the shared attribution contract in `$kalmes-connect` → `references/agent-activity.md`: label the actual agent and skill, keep one task UUID, and include the resolved plugin when needed. For local edits in a configured checkout, follow its automatic task-context workflow and AGENTS.md; background observation and synchronization do not depend on Codex, hooks or user-run commands.

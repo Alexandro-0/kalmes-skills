@@ -37,3 +37,7 @@ Do not trigger a failing API, edit extension code, delete events, or access Mong
 ## Output
 
 State the environment, effective time range/timezone, pages or events examined, any local filters, and whether coverage is complete. For an individual event, retain its ID for traceability and show only relevant diagnostics. Parse a JSON-encoded `message` for readability, preserving its meaning; `exceptions[].stack` contains the separately captured traceback. Long messages/stacks may be truncated, so do not call them complete source logs. Redact secrets if present in application-generated messages.
+
+## Activity attribution
+
+Activity integration requires **Kalmes 2.1.0 or later**. For Kalmes HTTP calls, including reused sessions, follow the shared attribution contract in `$kalmes-connect` → `references/agent-activity.md`: label the actual agent and skill, keep one task UUID, and include the resolved plugin when needed. For local edits in a configured checkout, follow its automatic task-context workflow and AGENTS.md; background observation and synchronization do not depend on Codex, hooks or user-run commands.

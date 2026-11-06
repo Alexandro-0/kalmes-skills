@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kalmes Agent Activity"
+  short_description: "Track and review agent activity in Kalmes 2.1.0+"
+  default_prompt: "Use $kalmes-agent-activity to configure automatic local activity tracking and review bounded results on Kalmes 2.1.0 or later."

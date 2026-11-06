@@ -13,6 +13,8 @@ Recommend a least-privilege API key bound to the required SuperUser, Admin, or I
 
 ## Connect
 
+Before protected Kalmes requests, including reuse of an existing session, apply the [activity attribution contract](references/agent-activity.md). Keep one task UUID, label the actual active skill and resolved plugin, and preserve the existing Authorization header. Activity integration requires **Kalmes 2.1.0 or later**. Use the actual agent name, not a fixed Codex label. For local edits in a configured checkout, follow the automatic task-context workflow in that contract and AGENTS.md; background observation and sync do not depend on hooks or user-run commands.
+
 1. Normalize the base URL to `https://host/<project>/api/`; preserve any existing project prefix and trailing slash.
 2. Require normal TLS verification. Ask before allowing a development self-signed exception; never normalize an exception into production guidance.
 3. Call `GET ping`. Continue only when HTTP 200 and `ready` is not false. Treat 503 `service_initializing` as a temporary state, not bad credentials.

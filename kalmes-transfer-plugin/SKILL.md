@@ -64,3 +64,7 @@ For an encrypted pack, do not claim that plain-tar inspection passed. Verify its
 ## Completion
 
 Report the operation, source and target environments, plugin/version, plain or encrypted mode, filename, size, SHA-256, included or affected resources, preflight result, confirmation, HTTP result, read-back tests, `Initial` verification, required ENV follow-up, rollback material, and unresolved risks. Never include secrets, JWTs, ENV values, or sensitive source.
+
+## Activity attribution
+
+Activity integration requires **Kalmes 2.1.0 or later**. For Kalmes HTTP calls, including reused sessions, follow the shared attribution contract in `$kalmes-connect` → `references/agent-activity.md`: label the actual agent and skill, keep one task UUID, and include the resolved plugin when needed. For local edits in a configured checkout, follow its automatic task-context workflow and AGENTS.md; background observation and synchronization do not depend on Codex, hooks or user-run commands.

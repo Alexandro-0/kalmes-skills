@@ -33,3 +33,7 @@ When the module name and contract are known, send the scoped request directly. U
 ## Completion
 
 Report module, method, endpoint shape, non-secret filters, status, affected or returned record count, and any uncertain side effect. If a Kalmes password was supplied, require immediate replacement and session revocation.
+
+## Activity attribution
+
+Activity integration requires **Kalmes 2.1.0 or later**. For Kalmes HTTP calls, including reused sessions, follow the shared attribution contract in `$kalmes-connect` → `references/agent-activity.md`: label the actual agent and skill, keep one task UUID, and include the resolved plugin when needed. For local edits in a configured checkout, follow its automatic task-context workflow and AGENTS.md; background observation and synchronization do not depend on Codex, hooks or user-run commands.

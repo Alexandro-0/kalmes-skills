@@ -34,3 +34,7 @@ Read [references/access-api.md](references/access-api.md).
 ## Completion
 
 Report the access matrix, changed account/role keys, category/path/page rules, and positive/negative tests. Require immediate password replacement and session revocation only if password fallback was used.
+
+## Activity attribution
+
+Activity integration requires **Kalmes 2.1.0 or later**. For Kalmes HTTP calls, including reused sessions, follow the shared attribution contract in `$kalmes-connect` → `references/agent-activity.md`: label the actual agent and skill, keep one task UUID, and include the resolved plugin when needed. For local edits in a configured checkout, follow its automatic task-context workflow and AGENTS.md; background observation and synchronization do not depend on Codex, hooks or user-run commands.

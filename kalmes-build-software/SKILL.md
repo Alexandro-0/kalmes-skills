@@ -47,3 +47,7 @@ Only when password fallback is used, tell the user before starting that they mus
 ## Definition of done
 
 Require all applicable items: verified plugin code and FAP definitions, persisted data, validated API, working HTML/page, verified system name/logo branding, registered menu, two language packs, enforced roles, file handling, scheduled behavior, negative tests, version/backup, inspected portable plugin pack when requested, release evidence, rollback steps, and credential-rotation reminder.
+
+## Activity attribution
+
+Activity integration requires **Kalmes 2.1.0 or later**. For Kalmes HTTP calls, including reused sessions, follow the shared attribution contract in `$kalmes-connect` → `references/agent-activity.md`: label the actual agent and skill, keep one task UUID, and include the resolved plugin when needed. For local edits in a configured checkout, follow its automatic task-context workflow and AGENTS.md; background observation and synchronization do not depend on Codex, hooks or user-run commands.

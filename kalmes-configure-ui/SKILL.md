@@ -62,3 +62,7 @@ For existing mismatches, report the affected record and references before changi
 ## Completion
 
 Report previous/new system name and logo URL without sensitive data, page route, target URL, menu category/order, language keys, roles, tests, and rollback. Do not expose `key16` or the HTML shared key in the report. Require immediate password replacement and session revocation only if password fallback was used.
+
+## Activity attribution
+
+Activity integration requires **Kalmes 2.1.0 or later**. For Kalmes HTTP calls, including reused sessions, follow the shared attribution contract in `$kalmes-connect` → `references/agent-activity.md`: label the actual agent and skill, keep one task UUID, and include the resolved plugin when needed. For local edits in a configured checkout, follow its automatic task-context workflow and AGENTS.md; background observation and synchronization do not depend on Codex, hooks or user-run commands.

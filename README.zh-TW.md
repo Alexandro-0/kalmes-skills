@@ -61,12 +61,15 @@ AI Agent 可以依照當前任務選擇適合的 Skill，只有在需要時才�
 
 ## Connection & API
 
+**相容性：** `kalmes-agent-activity` 與共用活動追蹤整合必須搭配 **Kalmes 2.1.0 或更新版本** 才能正確使用。本機自動收集目前需要 Windows、Python 3.10+ 與 Git，不依賴 Codex 或 hooks。
+
 | Skill                                            | 用途                                                                     |
 | ------------------------------------------------ | ------------------------------------------------------------------------ |
 | [`kalmes-connect`](./kalmes-connect)             | 連線並驗證 Kalmes HTTP API、確認系統可用狀態，並安全地管理登入 Session。 |
 | [`kalmes-invoke-module`](./kalmes-invoke-module) | 透過已驗證的 HTTP Request 呼叫既有的 Kalmes Extra Code API Module。      |
 | [`kalmes-get-api-error-events`](./kalmes-get-api-error-events) | 依時間範圍取得 API 5xx 異常事件，檢視帳號、擴充程式錯誤訊息與例外 stack。 |
 | [`kalmes-event-hub`](./kalmes-event-hub) | 發布事件、註冊 ExtraCode 傾聽者，並在事件中心的測試收件匣驗證投遞結果。 |
+| [`kalmes-agent-activity`](./kalmes-agent-activity) | 設定不綁定 Agent 的本機自動追蹤／同步，並以受限查詢檢視活動。**需要 Kalmes 2.1.0 以上。** |
 
 ## Data & FAP
 

@@ -61,12 +61,15 @@ This allows Kalmes-related knowledge to remain:
 
 ## Connection & API
 
+**Compatibility:** `kalmes-agent-activity` and the shared activity integration require **Kalmes 2.1.0 or later**. Automatic local collection currently uses Windows, Python 3.10+ and Git; it does not require Codex or hooks.
+
 | Skill                                            | Purpose                                                                                                      |
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
 | [`kalmes-connect`](./kalmes-connect)             | Connect and authenticate to a Kalmes HTTP API, validate readiness, and manage authenticated sessions safely. |
 | [`kalmes-invoke-module`](./kalmes-invoke-module) | Invoke existing Kalmes Extra Code API modules through authenticated HTTP requests.                           |
 | [`kalmes-get-api-error-events`](./kalmes-get-api-error-events) | Retrieve API 5xx events by time range, including accounts, Extra Code failures, and exception stacks. |
 | [`kalmes-event-hub`](./kalmes-event-hub) | Publish typed events, register ExtraCode observers, and verify delivery in the Event Hub test inbox. |
+| [`kalmes-agent-activity`](./kalmes-agent-activity) | Configure agent-neutral automatic local tracking and sync, or review bounded activity records. **Requires Kalmes 2.1.0+.** |
 
 ## Data & FAP
 

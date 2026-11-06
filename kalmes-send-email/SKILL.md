@@ -58,3 +58,7 @@ Use this section only when the user asks to configure email, the module is absen
 ## Credential handling
 
 Never echo or save Kalmes API keys, passwords, JWTs, Gmail passwords, or SMTP credentials. If the user supplied a Kalmes password during the task, remind them afterward to replace it and revoke or end its active sessions. Revoke a temporary Kalmes API key or Gmail App Password when it was exposed or is no longer needed.
+
+## Activity attribution
+
+Activity integration requires **Kalmes 2.1.0 or later**. For Kalmes HTTP calls, including reused sessions, follow the shared attribution contract in `$kalmes-connect` → `references/agent-activity.md`: label the actual agent and skill, keep one task UUID, and include the resolved plugin when needed. For local edits in a configured checkout, follow its automatic task-context workflow and AGENTS.md; background observation and synchronization do not depend on Codex, hooks or user-run commands.
