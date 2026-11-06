@@ -23,6 +23,7 @@ User Request
 kalmes-build-software
     │
     ├── kalmes-connect
+    ├── kalmes-project-context
     ├── kalmes-manage-fap
     ├── kalmes-manage-data
     ├── kalmes-develop-code
@@ -58,6 +59,7 @@ This allows Kalmes-related knowledge to remain:
 | Skill                                              | Purpose                                                                                                                                                         |
 | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`kalmes-build-software`](./kalmes-build-software) | Build complete Kalmes features by coordinating data structures, APIs, HTML, UI configuration, permissions, testing, packaging, release, and rollback workflows. |
+| [`kalmes-project-context`](./kalmes-project-context) | Maintain project requirements, effective designs, API/page/schedule/role/schema inventories, and cross-session handoffs. |
 
 ## Connection & API
 
@@ -206,6 +208,7 @@ For example:
 kalmes-build-software
         │
         ├── kalmes-connect
+        ├── kalmes-project-context
         ├── kalmes-manage-fap
         ├── kalmes-manage-data
         ├── kalmes-develop-code
@@ -228,6 +231,7 @@ your-project/
 └── .agents/
     └── skills/
         ├── kalmes-connect/
+        ├── kalmes-project-context/
         ├── kalmes-analyze-data/
         ├── kalmes-manage-data/
         └── ...
@@ -255,6 +259,7 @@ For example:
 .agents/
 └── skills/
     ├── kalmes-connect/
+    ├── kalmes-project-context/
     └── kalmes-analyze-data/
 ```
 

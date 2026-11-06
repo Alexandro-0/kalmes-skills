@@ -31,6 +31,8 @@ Do not approve production release when any applicable item lacks evidence: serve
 
 ## Completion
 
+When a knowledge project is in scope, use `$kalmes-project-context` to retrieve effective acceptance criteria and the exact version before testing. Append verification results, remaining failures, resource IDs and next steps in a handoff using the same run UUID. Update resource verification only with evidence. If the specification changed, identify stale results and revalidation needs rather than claiming the new version is verified.
+
 Return a concise release record: environment, versions, changed IDs/routes, test matrix, results, remaining risks, monitoring, and rollback. Never include secrets. Require immediate password replacement and session revocation only if password fallback was used.
 
 ## Activity attribution

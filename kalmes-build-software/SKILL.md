@@ -35,6 +35,10 @@ Only when password fallback is used, tell the user before starting that they mus
 12. If the user explicitly wants the internal Kalmes Agent queue to continue work, create and run it with `$kalmes-manage-subtasks`; do not substitute that queue for ordinary Codex implementation.
 13. Summarize plugin code, definitions, changed resources, endpoint/module names, roles, tests, rollback instructions, and unresolved risks. Require password replacement and session revocation only when password fallback was used.
 
+## Project requirements and inventory
+
+When a knowledge project is in scope, use `$kalmes-project-context` before implementation to read effective requirements, design, inventory and the last handoff. Preserve the exact requirement version used. Record requested specification changes, update affected API/page/schedule/role/schema resources after verification, and append a handoff with this task's run UUID. Reuse explicit user decisions when publishing. If unsupported, report the persistence limitation and continue independently authorized work without claiming synchronization.
+
 ## Change discipline
 
 - Inspect before mutating. Save the current config and source version needed for rollback.

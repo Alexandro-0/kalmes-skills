@@ -23,6 +23,7 @@ Kalmes Skills 是一組可重複使用的 Agent Skill，讓 AI Agent 知道如�
 kalmes-build-software
     │
     ├── kalmes-connect
+    ├── kalmes-project-context
     ├── kalmes-manage-fap
     ├── kalmes-manage-data
     ├── kalmes-develop-code
@@ -58,6 +59,7 @@ AI Agent 可以依照當前任務選擇適合的 Skill，只有在需要時才�
 | Skill                                              | 用途                                                                                                     |
 | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | [`kalmes-build-software`](./kalmes-build-software) | 建立完整的 Kalmes 功能，協調資料結構、API、HTML、UI 設定、權限、測試、封裝、Release 與 Rollback 等流程。 |
+| [`kalmes-project-context`](./kalmes-project-context) | 管理專案需求、有效設計、API／網頁／排程／角色／資料結構清單，以及跨對話開發交接。 |
 
 ## Connection & API
 
@@ -213,6 +215,7 @@ git clone https://github.com/Alexandro-0/kalmes-skills.git
 kalmes-build-software
         │
         ├── kalmes-connect
+        ├── kalmes-project-context
         ├── kalmes-manage-fap
         ├── kalmes-manage-data
         ├── kalmes-develop-code
@@ -235,6 +238,7 @@ your-project/
 └── .agents/
     └── skills/
         ├── kalmes-connect/
+        ├── kalmes-project-context/
         ├── kalmes-analyze-data/
         ├── kalmes-manage-data/
         └── ...
@@ -262,6 +266,7 @@ your-project/.agents/skills/
 .agents/
 └── skills/
     ├── kalmes-connect/
+    ├── kalmes-project-context/
     └── kalmes-analyze-data/
 ```
 

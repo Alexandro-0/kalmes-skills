@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kalmes Project Context"
+  short_description: "Manage project requirements, resources and handoffs"
+  default_prompt: "Use $kalmes-project-context to read the effective requirements and inventory, then record the development handoff."

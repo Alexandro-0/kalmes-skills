@@ -91,6 +91,8 @@ For a new plugin-scoped FAP feature:
 
 ## Completion
 
+For work tied to a knowledge project, use `$kalmes-project-context` to read its effective requirement and relevant resources before editing. After validation, update affected API/page/schedule/schema resources with source locations, dependencies and evidence, then append a handoff tied to the actual requirement version and run UUID. Keep source in its existing source store; do not copy credentials or full source files into project knowledge. Missing support does not block independently authorized local work.
+
 Report plugin code, filenames, types, runtime routes, collection/module dependencies, job IDs, tests, versions, and rollback without including source secrets or the HTML shared key. Require immediate password replacement and session revocation only if password fallback was used.
 
 ## Activity attribution
