@@ -5,6 +5,10 @@ description: Send HTML email from external Codex through the authenticated Kalme
 
 # Send Email from Kalmes
 
+## Mandatory operation boundary
+
+Use this skill's documented Kalmes APIs for live application operations. Never bypass them through Docker/Compose commands or APIs, container shells, SSH, mounted runtime files, or direct database access, including for reads, diagnosis, verification, release or rollback. API errors, missing capabilities and reused sessions do not relax this rule. Stop the blocked operation and report the limitation instead of switching to infrastructure access. Read the shared operation boundary in `$kalmes-connect` -> `references/operation-boundary.md` for local-work and installation scope; it also applies when invoking another skill or delegating work.
+
 Default to the fast path. Do not audit the module, ENV, SMTP configuration, authorization, recipient privacy, or delivery behavior before an ordinary send. Inspect those only during first-time setup or after the API is blocked or fails.
 
 ## Fast path: send immediately
@@ -53,7 +57,7 @@ Use this section only when the user asks to configure email, the module is absen
 2. Configure `kalmes_mail_sender_account` and `kalmes_mail_sender_gmail_app_password` in the protected server-side ENV store.
 3. Have the user enter the Gmail App Password directly in a masked secret interface. Never ask them to paste it into the conversation or read it back.
 4. Repair `kalmesMailSender.py` only if its current implementation prevents the documented API call from working.
-5. Reload the module/service if ENV changes are not picked up, then return to the fast path.
+5. If ENV changes are not picked up, use only a documented, authorized Kalmes reload operation. If none is available, report the reload requirement and stop the blocked send; do not restart Docker containers or services as a workaround. Return to the fast path after reload is verified.
 
 ## Credential handling
 

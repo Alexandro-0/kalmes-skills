@@ -4,6 +4,10 @@ description: Read, create, edit, run, version, and integrate Kalmes Extra Code f
 ---
 # Develop Kalmes Code
 
+## Mandatory operation boundary
+
+Use this skill's documented Kalmes APIs for live application operations. Never bypass them through Docker/Compose commands or APIs, container shells, SSH, mounted runtime files, or direct database access, including for reads, diagnosis, verification, release or rollback. API errors, missing capabilities and reused sessions do not relax this rule. Stop the blocked operation and report the limitation instead of switching to infrastructure access. Read the shared operation boundary in `$kalmes-connect` -> `references/operation-boundary.md` for local-work and installation scope; it also applies when invoking another skill or delegating work.
+
 Operate through authenticated HTTP endpoints and repository files available to Codex. Do not depend on the web Agent's internal `CreateApiSourceCode`, `CreateHtmlSourceCode`, `CreateRunnableCode`, `RunScheduler`, or `readSourceCode` tools.
 
 ## Mandatory safety gate

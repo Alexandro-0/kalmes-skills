@@ -7,6 +7,10 @@ description: Install Docker and deploy Kalmes V2 from an official Kalmes V2 rele
 
 Install the software on the user's current computer unless the user names another host. Perform safe, discoverable steps autonomously, but leave license acceptance, elevation prompts, reboots, and secret entry to the user.
 
+## Installation-only infrastructure scope
+
+Docker access in this skill is limited to an explicitly requested Kalmes V2 installation or reinstall, its prerequisites and deployment readiness checks. A request to build, import, repair, test or release a plugin does not authorize this workflow. Never switch to this skill to bypass an unavailable or failing application API, and never use container execution, file copying, mounted runtime edits or direct database operations to complete plugin work. After installation, use the relevant application skill and its documented APIs. Read the shared operation boundary in `$kalmes-connect` -> `references/operation-boundary.md`.
+
 ## Establish the target
 
 1. Detect the host OS, version, CPU architecture, available package manager, privilege level, free disk space, and whether the current shell is native, WSL, a container, or a remote session. Do not mistake WSL for the Windows host. Confirm that the supplied release supports the detected CPU architecture before loading its images.

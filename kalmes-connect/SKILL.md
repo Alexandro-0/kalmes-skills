@@ -5,6 +5,10 @@ description: Connect and authenticate to a Kalmes HTTP API with a preferred API 
 
 # Connect to Kalmes
 
+## Mandatory operation boundary
+
+Use this skill's documented Kalmes APIs for live application operations. Never bypass them through Docker/Compose commands or APIs, container shells, SSH, mounted runtime files, or direct database access, including for reads, diagnosis, verification, release or rollback. API errors, missing capabilities and reused sessions do not relax this rule. Stop the blocked operation and report the limitation instead of switching to infrastructure access. Read the [shared operation boundary](references/operation-boundary.md) for local-work and installation scope; it also applies when invoking another skill or delegating work.
+
 ## Required inputs
 
 For a protected call, reuse a valid in-memory session only for the same base URL, environment and acting account within this task. Proceed directly to the requested call. For a new session, require the URL, environment and an API key (preferred) or account/password fallback. If credentials are missing, ask for an API key from **Advanced Settings → API Keys** or **API Access → API Keys**, depending on the manager role.

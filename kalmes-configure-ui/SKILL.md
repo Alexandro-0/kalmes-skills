@@ -5,6 +5,10 @@ description: Read or configure Kalmes branding, displayed system name, logo, emb
 
 # Configure Kalmes UI
 
+## Mandatory operation boundary
+
+Use this skill's documented Kalmes APIs for live application operations. Never bypass them through Docker/Compose commands or APIs, container shells, SSH, mounted runtime files, or direct database access, including for reads, diagnosis, verification, release or rollback. API errors, missing capabilities and reused sessions do not relax this rule. Stop the blocked operation and report the limitation instead of switching to infrastructure access. Read the shared operation boundary in `$kalmes-connect` -> `references/operation-boundary.md` for local-work and installation scope; it also applies when invoking another skill or delegating work.
+
 ## Read-only system identity
 
 For a request that only asks for the displayed Kalmes system name or logo, call `GET event/signin/page_url` and return `data.title` and, when requested, `data.logo`. This public sign-in response is the smallest supported read path and is not authorization evidence. Do not collect a password when this response fully answers the request.

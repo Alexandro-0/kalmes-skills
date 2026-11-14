@@ -5,6 +5,10 @@ description: Configure automatic local file tracking and synchronization, label 
 
 # Kalmes Agent Activity
 
+## Mandatory operation boundary
+
+Use this skill's documented Kalmes APIs for live application operations. Never bypass them through Docker/Compose commands or APIs, container shells, SSH, mounted runtime files, or direct database access, including for reads, diagnosis, verification, release or rollback. API errors, missing capabilities and reused sessions do not relax this rule. Stop the blocked operation and report the limitation instead of switching to infrastructure access. Read the shared operation boundary in `$kalmes-connect` -> `references/operation-boundary.md` for local-work and installation scope; it also applies when invoking another skill or delegating work.
+
 **Requires Kalmes 2.1.0 or later.** Older versions do not provide this skill's activity APIs, scoped collector credentials, or automatic synchronization contract. Never claim tracking is connected solely because the server accepts attribution headers.
 
 Read the shared activity contract in `$kalmes-connect` → `references/agent-activity.md` for labels and automatic task context. Use the actual agent name; never assume Codex. Filesystem observation alone cannot establish the author, skill or plugin of an edit.

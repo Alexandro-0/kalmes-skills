@@ -5,6 +5,10 @@ description: Use the Kalmes Event Hub (事件中心) to publish typed JSON event
 
 # Kalmes Event Hub
 
+## Mandatory operation boundary
+
+Use this skill's documented Kalmes APIs for live application operations. Never bypass them through Docker/Compose commands or APIs, container shells, SSH, mounted runtime files, or direct database access, including for reads, diagnosis, verification, release or rollback. API errors, missing capabilities and reused sessions do not relax this rule. Stop the blocked operation and report the limitation instead of switching to infrastructure access. Read the shared operation boundary in `$kalmes-connect` -> `references/operation-boundary.md` for local-work and installation scope; it also applies when invoking another skill or delegating work.
+
 Reuse the target project and authenticated session. If a connection is needed, follow `$kalmes-connect`. Read the [Event Hub contract](references/event-hub.md) for request and response shapes, the ExtraCode SDK and retry semantics.
 
 - **Publish an event.** Send the requested `type` and optional JSON object `data` once and return its receipt. Inspect deliveries only if requested or diagnosing a failure. The server assigns the ID and timestamps. Matching subscribers can execute live business Handlers.
