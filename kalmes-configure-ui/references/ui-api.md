@@ -180,7 +180,7 @@ Typical page body:
 ```json
 {
   "name_key": "MaintenanceHtml",
-  "override_path": "/maintenance",
+  "override_path": "/MaintenanceHtml",
   "target_url": "/api/extracode/html/preview/MaintenanceHtml",
   "roles": ["Maintenance"],
   "menu_category": "maintenance",
@@ -192,8 +192,8 @@ Typical page body:
 Mandatory rules for Extra Code HTML embedded pages:
 
 - For `MaintenanceHtml.py`, use `name_key: "MaintenanceHtml"` and a preview target ending in `/MaintenanceHtml`; use the deployment's verified route prefix. Strip only the final `.py` and preserve exact case. This is required by the current plugin exporter, even when a mismatched page renders correctly via `target_url`.
-- Read back the code filename, `name_key`, preview target and both language-pack keys after registration. They must identify the same HTML module.
-- Custom `override_path` and menu category need not equal the filename. However, the current plugin importer rebuilds `override_path` from the destination prefix plus `name_key`, and rebuilds `target_url` for newly inserted pages. Do not promise preservation of custom routes; inventory and verify them during transfer.
+- Read back the code filename, `name_key`, `override_path`, preview target and both language-pack keys after registration. The filename with only the final `.py` removed, `name_key`, final `override_path` segment, preview module name and both language-pack keys must match exactly, including case.
+- Set `override_path` to `/<name_key>` or `<verified deployment prefix>/<name_key>`; only the deployment prefix may differ. For `boshiQualityMonitorPage.py` under `/kalmes`, use `/kalmes/boshiQualityMonitorPage`, never `/kalmes/boshi-quality-monitor`. Menu category and display text may differ. When repairing an existing route, update the original page record and migrate affected menu links/references within the authorized scope. The current plugin importer rebuilds `override_path` from the destination prefix plus `name_key`, and rebuilds `target_url` for newly inserted pages. Inventory legacy routes before transfer and verify the destination prefix, exact filename stem and navigation afterward.
 
 - Always send `"key16": "aigencodeskalmes"` when creating or updating the embedded-page record.
 - Never treat `key16` as optional for a Kalmes Extra Code HTML target.

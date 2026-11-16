@@ -125,7 +125,7 @@ Inventory source registrations using `GET event/overrdiePage`; match selected HT
 
 Run `python scripts/inspect_plugin_tar.py plugin.tar --expect-page InventoryHtml` for a pack expected to include that registered page; repeat the option for additional pages. The script validates declared Extra Code targets and name consistency, and fails when an expected page is missing. Without the expected set it warns for HTML modules lacking registrations; unregistered HTML helpers and API-only packs are permitted. `VALID` alone does not certify source-to-pack completeness.
 
-The current importer rebuilds `override_path` from the destination prefix and `name_key`; when inserting a new page, it also rebuilds `target_url` from `name_key`. Preserve a record of custom source routes and verify destination navigation and links. A package's custom paths are not guaranteed to survive import.
+The current importer rebuilds `override_path` from the destination prefix and `name_key`; when inserting a new page, it also rebuilds `target_url` from `name_key`. Apply the `$kalmes-configure-ui` route naming rule: the final `override_path` segment must equal the exact HTML filename with only the final `.py` removed, preserving case; use `/<name_key>` or `<verified destination prefix>/<name_key>`. Inventory legacy nonconforming source routes and affected links; repair only within the authorized scope. Verify destination navigation and links after import. A package's legacy custom paths are not guaranteed to survive import.
 
 ## 5. Import effects
 
