@@ -17,6 +17,8 @@ Production releases, plugin activation, config import, code execution, data clea
 
 Read [references/test-release.md](references/test-release.md).
 
+For plugin installation, upgrades or routing changes, select the applicable acceptance scenarios from `$kalmes-transfer-plugin` -> `references/deployment-routing.md`. Require evidence across installed metadata, page preview, renderer query propagation and API selection; a valid tar or successful import response is insufficient.
+
 ## Verification workflow
 
 1. Select checks for the changed surfaces and their dependencies. Reuse observed results only for the same revision, environment, role and relevant state. Verify readiness and license prerequisites for release; reconnect only if needed.
