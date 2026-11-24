@@ -115,6 +115,8 @@ Typical metadata:
 - `menu_forbidden_access` merges category denial rules.
 - `fap_ds` upserts FAP definitions by `collectionName`; it does not export business records.
 
+For the complete relationship between source folders, destination layout, page registration and HTML-to-API calls, read [deployment-routing.md](deployment-routing.md). In particular, `resources[].plugin` selects export source; runtime `plugin` must select the actual installed module folder. The inspector reports an expected destination folder and page-routing warnings, not live installation verification.
+
 The importer recognizes code types such as `API`, `Html`, `Others`, and `Initial`. Verify current target support. After importing HTML, verify that Extra Code metadata and embedded-page registration still use the required `aigencodeskalmes` `key16` contract.
 
 ### Embedded-page export compatibility

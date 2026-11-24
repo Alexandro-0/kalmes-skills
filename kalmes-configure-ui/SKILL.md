@@ -19,6 +19,8 @@ For protected calls, reuse the valid session for the same target and account. If
 
 Consult the relevant section of [references/ui-api.md](references/ui-api.md) for the affected config, menu, embedded page or language pack.
 
+For Extra Code pages installed in plugin folders, also follow `$kalmes-transfer-plugin` -> `references/deployment-routing.md`. Keep the exact page-name contract while selecting the installed HTML folder through the verified preview query. Verify that iframe URL assembly preserves it and that the page calls the intended API folder.
+
 ## Mandatory HTML embedded-page key
 
 Every embedded page that targets a Kalmes Extra Code `Html` route MUST use this fixed 16-character `key16` value:
@@ -38,7 +40,7 @@ Rules:
 
 ## Workflow
 
-For an embedded Extra Code HTML page, derive `name_key` from the exact code filename by removing only the final `.py`; preserve case. For example, `RinkFlowHomePage.py` requires `name_key: "RinkFlowHomePage"` and a preview target ending in `/RinkFlowHomePage`. The current plugin exporter matches this name exactly and silently omits mismatches. A working preview alone does not prove export compatibility. Keep both language-pack label keys equal to `name_key`. The final path segment of `override_path` MUST also equal this exact filename stem: use `/<name_key>` without a deployment prefix, or `<verified deployment prefix>/<name_key>` when one is required. Preserve case; do not substitute a display label, lowercase form, or kebab-case slug. For example, `boshiQualityMonitorPage.py` under `/kalmes` requires `/kalmes/boshiQualityMonitorPage`. Custom display text and menu category may differ. This route naming requirement is separate from the exporter's `name_key` matching behavior.
+For an embedded Extra Code HTML page, derive `name_key` from the exact code filename by removing only the final `.py`; preserve case. For example, `RinkFlowHomePage.py` requires `name_key: "RinkFlowHomePage"` and a preview URL whose path ends in `/RinkFlowHomePage` (before any query). The current plugin exporter matches this name exactly and silently omits mismatches. A working preview alone does not prove export compatibility. Keep both language-pack label keys equal to `name_key`. The final path segment of `override_path` MUST also equal this exact filename stem: use `/<name_key>` without a deployment prefix, or `<verified deployment prefix>/<name_key>` when one is required. Preserve case; do not substitute a display label, lowercase form, or kebab-case slug. For example, `boshiQualityMonitorPage.py` under `/kalmes`, use `/kalmes/boshiQualityMonitorPage`. Custom display text and menu category may differ. This route naming requirement is separate from the exporter's `name_key` matching behavior.
 
 For existing mismatches, report the affected record and references before changing identity. When repair is in scope, update the existing record by ID, migrate its labels/references and links to any changed `override_path`, and verify navigation; do not create a duplicate page or blindly rename code. See the embedded-page section of `references/ui-api.md` for export/import limitations.
 

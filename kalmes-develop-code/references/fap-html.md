@@ -18,6 +18,8 @@ let query_param = {{query_param|safe}};
 
 Use only required keys from `query_param`; never append the whole object to an API URL.
 
+For a plugin's own Extra Code APIs, follow `$kalmes-transfer-plugin` -> `references/deployment-routing.md`. A versioned page must receive its verified folder through the renderer and select the API's actual installed folder in its request. Reuse the page folder only when both modules are deployed together; a flat API or a cross-plugin dependency needs its own resolved location. Use `URLSearchParams` to add the required selector without copying unrelated page query values. Preserve the platform helper's separate `plugin=mesEnv.kalVer` dependency.
+
 ## Authenticated API helpers
 
 Use the helper functions with `getToken()`:

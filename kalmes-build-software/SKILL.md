@@ -28,7 +28,7 @@ Only when password fallback is used, tell the user before starting that they mus
 1. Confirm the URL, API key or fallback account/password, target environment, requested behavior, roles, and acceptance criteria. Establish a stable ASCII plugin code; preserve the user's existing plugin code when continuing prior work.
 2. Use `$kalmes-connect` when a new authenticated session is needed.
 3. Map the acceptance criteria to affected surfaces first. Inventory only those resources and their dependencies. Reuse verified identifiers and definitions within the task. Refresh mutable state before a write if it may have changed.
-4. Design the feature using [references/workflow.md](references/workflow.md). Identify reversible and destructive changes.
+4. Design the feature using [references/workflow.md](references/workflow.md). For portable HTML/API features, choose shared or versioned installation and follow `$kalmes-transfer-plugin` -> `references/deployment-routing.md` before implementation. Carry the folder and routing decisions through development, page registration and release. Identify reversible and destructive changes.
 5. Design or update FAP definitions and their parent/reference graph with `$kalmes-manage-fap`; use `$kalmes-manage-data` for runtime records and files.
 6. Implement APIs, HTML, initialization jobs, schedules, and shared modules with `$kalmes-develop-code`. Exercise existing runtime modules through `$kalmes-invoke-module`.
 7. If the feature sends email, operate it with `$kalmes-send-email`; use its fast path for an explicit send request and enter setup or diagnosis only when needed.

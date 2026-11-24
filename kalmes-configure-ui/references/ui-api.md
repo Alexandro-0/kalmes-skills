@@ -175,7 +175,7 @@ For every embedded page whose `target_url` points to a Kalmes Extra Code HTML pr
 aigencodeskalmes
 ```
 
-Typical page body:
+Typical page body for HTML in the shared directory:
 
 ```json
 {
@@ -191,7 +191,9 @@ Typical page body:
 
 Mandatory rules for Extra Code HTML embedded pages:
 
-- For `MaintenanceHtml.py`, use `name_key: "MaintenanceHtml"` and a preview target ending in `/MaintenanceHtml`; use the deployment's verified route prefix. Strip only the final `.py` and preserve exact case. This is required by the current plugin exporter, even when a mismatched page renders correctly via `target_url`.
+- For versioned-directory HTML, select its actual installed folder with `plugin=<folder>` in the preview target. Use the destination's verified stored-target/prefix convention and preserve other required query parameters. Keep folder selection separate from `name_key` and `override_path`; follow `$kalmes-transfer-plugin` -> `references/deployment-routing.md` for both modes and HTML-to-API propagation. Read back the target after import or update because rebuilding a URL can drop the selector.
+
+- For `MaintenanceHtml.py`, use `name_key: "MaintenanceHtml"` and a preview URL whose path ends in `/MaintenanceHtml` before any query; use the deployment's verified route prefix. Strip only the final `.py` and preserve exact case. This is required by the current plugin exporter, even when a mismatched page renders correctly via `target_url`.
 - Read back the code filename, `name_key`, `override_path`, preview target and both language-pack keys after registration. The filename with only the final `.py` removed, `name_key`, final `override_path` segment, preview module name and both language-pack keys must match exactly, including case.
 - Set `override_path` to `/<name_key>` or `<verified deployment prefix>/<name_key>`; only the deployment prefix may differ. For `boshiQualityMonitorPage.py` under `/kalmes`, use `/kalmes/boshiQualityMonitorPage`, never `/kalmes/boshi-quality-monitor`. Menu category and display text may differ. When repairing an existing route, update the original page record and migrate affected menu links/references within the authorized scope. The current plugin importer rebuilds `override_path` from the destination prefix plus `name_key`, and rebuilds `target_url` for newly inserted pages. Inventory legacy routes before transfer and verify the destination prefix, exact filename stem and navigation afterward.
 

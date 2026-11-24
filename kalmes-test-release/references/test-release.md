@@ -45,6 +45,8 @@ For smaller UI/access changes, save the exact original config fields and embedde
 
 Use `$kalmes-transfer-plugin` to export, preflight, import, and verify plain or encrypted plugin tar packages. Treat import as a high-impact, non-transactional mutation that can overwrite code and definitions and automatically execute packaged `Initial` modules. Require an immutable version, non-secret package content, exact target backups, explicit confirmation, checksum evidence, read-back verification, and tested rollback.
 
+For HTML/API plugins, use that skill's `references/deployment-routing.md` acceptance scenarios. Verify the chosen flat or versioned layout, final page and API selectors, and first-install versus existing-page update behavior. Inspect page startup calls before opening it: activation may write data. Versioned code folders do not by themselves isolate Collections or make switching back a data rollback.
+
 ## Rollback order
 
 Prefer this dependency-aware sequence:

@@ -25,6 +25,8 @@ Creating, uploading, or running Extra Code is remote code execution. Inspect cur
 
 Consult [references/code-api.md](references/code-api.md) for the relevant source lifecycle or runtime contract when using those endpoints.
 
+For portable plugins or folder/routing changes, read `$kalmes-transfer-plugin` -> `references/deployment-routing.md`. Resolve HTML and API locations explicitly, pass only the required verified folder selector, and keep cross-folder dependencies distinct. Development source location and destination package layout can differ.
+
 ## Required Python API import path
 
 Every Python Extra Code item of type `API` must include this setup at module scope, before importing any Kalmes Extra Code modules, even if the API currently uses none.
@@ -35,6 +37,8 @@ sys.path.append('./extraCode')
 ```
 
 Before saving a new or edited API, verify that the setup is present and uncommented. Add it if missing and reuse existing setup to avoid duplicates.
+
+This setup affects Python imports; it does not select the HTML/API module for the HTTP loader or imply `flat=true`. Runtime folder selection and packaging must follow the deployment routing contract.
 
 ## Mandatory HTML shared secret
 

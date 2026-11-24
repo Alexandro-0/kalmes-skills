@@ -8,7 +8,7 @@ import re
 import sys
 import tarfile
 from pathlib import Path, PurePosixPath
-from urllib.parse import unquote, urlsplit
+from urllib.parse import parse_qs, unquote, urlsplit
 
 
 DEFAULT_MAX_MEMBERS = 10000
@@ -52,6 +52,35 @@ def plugin_root_candidates(member_map):
         if files_dir in names or any(item.startswith(files_prefix) for item in names):
             candidates.append((root, name, files_dir))
     return candidates
+
+
+def inspect_page_routing(meta, target, label, report):
+    """Warn about manifest routing; importers may rewrite targets at runtime."""
+    selectors = parse_qs(urlsplit(target).query, keep_blank_values=True).get('plugin', [])
+    if len(selectors) > 1:
+        report['warnings'].append(
+            f'{label}: ambiguous plugin query parameters; verify the destination preview request'
+        )
+        return
+    selector = selectors[0] if selectors else ''
+    flat = meta.get('flat')
+    if flat is True:
+        if selector:
+            report['warnings'].append(
+                f'{label}: flat=true page selects a plugin folder; '
+                'verify import removes a stale selector or resolves an intentional dependency'
+            )
+    elif flat is False:
+        if not selector:
+            report['warnings'].append(
+                f'{label}: flat=false page has no non-empty plugin selector; '
+                'verify the importer supplies the installed folder and HTML forwards the API location'
+            )
+        elif report['expected_install_folder'] is not None and selector != report['expected_install_folder']:
+            report['warnings'].append(
+                f'{label}: page plugin selector differs from the expected install folder; '
+                'verify destination rewriting and HTML/API locations'
+            )
 
 
 def inspect_embedded_pages(meta, descriptors, expected_pages, report):
@@ -100,6 +129,7 @@ def inspect_embedded_pages(meta, descriptors, expected_pages, report):
                 )
             if name == module and module in html_names:
                 registered_html.add(module)
+                inspect_page_routing(meta, target, label, report)
         elif name in html_names:
             report['errors'].append(
                 f'{label} for Html file {name}.py must have a matching Extra Code preview target'
@@ -208,6 +238,22 @@ def inspect_archive(path, max_members, max_bytes, expected_pages=()):
                 report["errors"].append(
                     f"{label} must contain only letters, digits, dots, underscores, or hyphens"
                 )
+        flat = meta.get('flat')
+        report['deployment_mode'] = (
+            'shared' if flat is True else 'versioned' if flat is False else 'unspecified'
+        )
+        report['expected_install_folder'] = None
+        if flat is True:
+            report['expected_install_folder'] = '.'
+        elif flat is False and all(
+            isinstance(value, str) and re.fullmatch(r'[A-Za-z0-9._-]+', value)
+            for value in (plugin_name, version)
+        ):
+            report['expected_install_folder'] = plugin_name + version
+        if flat is not True and flat is not False:
+            report['warnings'].append(
+                'flat is not an explicit boolean; confirm the importer default before assessing page routing'
+            )
         if not isinstance(descriptors, list):
             report["errors"].append("files must be an array")
             descriptors = []
@@ -317,6 +363,8 @@ def print_human(report):
         "version",
         "flat",
         "expose",
+        "deployment_mode",
+        "expected_install_folder",
     ):
         if key in report:
             print(f"{key}: {report[key]}")
